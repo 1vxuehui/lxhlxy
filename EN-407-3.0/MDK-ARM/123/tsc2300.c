@@ -143,25 +143,25 @@ uint16_t tcs2300_BLUE(void)
 	G=tcs2300_GREEN();
 	B=tcs2300_BLUE();
 	
-	if(R>G && R>B)//红色
-	{
-		return 3;
-	}
-	if(G>R && G>B)//绿色
-	{
-		return 1;
-	}
-	if(B>G && B>R)//蓝色
-	{
-		return 5;
-	}
 	if(R>220 && G>220 && B>220)//白色
 	{
 		return 2;
 	}
-	if(R<80 && G<80 && B<80)//黑色
+	else if(R<35 && G<35 && B<35)//黑色
 	{
 		return 4;
+	}
+	else if(R>G && R>B)//红色
+	{
+		return 3;
+	}
+	else if(G>R && G>B)//绿色
+	{
+		return 1;
+	}
+	else if(B>G && B>R)//蓝色
+	{
+		return 5;
 	}
    else
 	{
@@ -169,8 +169,8 @@ uint16_t tcs2300_BLUE(void)
 	}
 }
 
-void tsc2300(void)
-{
+void tsc2300(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
+	{
 	if(rgb() == 1)//绿
 	{
 		car_go_left();
