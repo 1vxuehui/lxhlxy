@@ -32,4 +32,4 @@ en_407/duoji.o: duoji.c ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h \
   ..\track\Track.h ..\track\motor.h 123\tsc2300.h ..\Core\Inc\tim.h \
-  ..\Core\Inc\main.h ..\Core\Inc\gpio.h duoji.h
+  ..\Core\Inc\main.h ..\Core\Inc\gpio.h ..\MDK-ARM\duoji.h

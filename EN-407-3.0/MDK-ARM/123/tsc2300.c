@@ -133,7 +133,7 @@ uint16_t tcs2300_BLUE(void)
 
 }
 
-	uint16_t rgb(void)
+	uint16_t rgb(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
 {
 	float R=0,G=0,B=0;
 	tcs2300_RED();
@@ -169,7 +169,7 @@ uint16_t tcs2300_BLUE(void)
 	}
 }
 
-void tsc2300(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
+void tsc2300(void)
 	{
 	if(rgb() == 1)//绿
 	{
@@ -178,7 +178,7 @@ void tsc2300(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
 		Tracking();
 		car_go_straight();
 		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1200);
+	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
 		HAL_Delay(50);
 		Tracking2();
 	}
@@ -187,7 +187,7 @@ void tsc2300(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
 		Tracking();
 		car_go_straight();
 		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1200);
+	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
 		HAL_Delay(50);
 		Tracking2();
 	}
@@ -198,7 +198,7 @@ void tsc2300(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
 		Tracking();
 		car_go_straight();
 		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1200);
+	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
 		HAL_Delay(50);
 		Tracking2();
 	}
@@ -209,7 +209,7 @@ void tsc2300(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
 		Tracking();
 		car_go_straight();
 		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1200);
+	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
 		HAL_Delay(50);
 		Tracking2();
 	}
@@ -220,7 +220,7 @@ void tsc2300(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
 		Tracking();
 		car_go_straight();
 		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1200);
+	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
 		HAL_Delay(50);
 		Tracking2();
 	}

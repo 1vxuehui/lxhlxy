@@ -27,6 +27,7 @@
 /* USER CODE BEGIN Includes */
 #include "Track.h"
 #include "motor.h"
+#include "duoji.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +66,7 @@ void SystemClock_Config(void);
 
 float R=0,G=0,B=0;
 int color;
-//pid_type_def motor[2];
+//pid_type_def motor[2];-
 //const static fp32 motor_speed_pid[3] = {MOTOR_SPEED_PID_KP, MOTOR_SPEED_PID_KI, MOTOR_SPEED_PID_KD};
 //const static fp32 motor_angle_pid[3] = {MOTOR_ANGLE_PID_KP,MOTOR_ANGLE_PID_KI, MOTOR_ANGLE_PID_KD};
 /* USER CODE END PFP */
@@ -139,18 +140,9 @@ HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 HAL_TIM_Base_Start_IT(&htim6);
 		 whitebalance();
   /* USER CODE END 2 */
-
   /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-		while (1)
+	while (1)
   {
-		R=tcs2300_RED();
-		G=tcs2300_GREEN();
-		B=tcs2300_BLUE();
-		color=rgb();
-		
-		
-		
 //		Tracking();
 //    /* USER CODE END WHILE */
 
