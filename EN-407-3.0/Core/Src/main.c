@@ -140,18 +140,117 @@ HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
 HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 
 HAL_TIM_Base_Start_IT(&htim6);
-		 whitebalance();
-HAL_Delay(1000);
+whitebalance();
+HAL_Delay(5000);
   /* USER CODE END 2 */
+Tracking();
+HAL_Delay(1000);
 MG90S_Rotate_down4();
 HAL_Delay(100);
 DISC_Rotate_Anticlockwise(500);
 HAL_Delay(1000);
 color=rgb();
 if(color==1)
-{
-	DISC_Rotate_Clockwise(500);
-}
+	{
+		DISC_Rotate_Clockwise(1000);
+		Trackinghou();
+		HAL_Delay(1000);
+		Tracking2();
+		HAL_Delay(100);
+		zuozhuan2();
+		HAL_Delay(100);
+		Tracking();
+		HAL_Delay(100);
+		Tracking3();
+		tuituitui();
+		HAL_Delay(1000);
+		MG90S_Rotate_up4();
+		HAL_Delay(1000);
+		Trackinghou();
+		Tracking2();
+		HAL_Delay(100);
+		youzhuan2();
+		DISC_Rotate_Anticlockwise(150);
+	}
+else if(color==2)
+	{
+		DISC_Rotate_Clockwise(1000);
+		Trackinghou();
+		HAL_Delay(1000);
+		Tracking2();
+		HAL_Delay(100);
+		zuozhuan1();
+		HAL_Delay(100);
+		Tracking();
+		HAL_Delay(100);
+		Tracking3();
+		tuituitui();
+		HAL_Delay(1000);
+		MG90S_Rotate_up4();
+		HAL_Delay(1000);
+		Trackinghou();
+		Tracking2();
+		HAL_Delay(100);
+		youzhuan1();
+		DISC_Rotate_Anticlockwise(150);
+	}
+else if(color==3)
+	{
+		DISC_Rotate_Clockwise(1000);
+		HAL_Delay(1000);
+		Tracking3();
+		tuituitui();
+		HAL_Delay(1000);
+		MG90S_Rotate_up4();
+		HAL_Delay(1000);
+		Trackinghou();
+		Tracking2();
+		DISC_Rotate_Anticlockwise(150);
+	}
+else if(color==4)
+	{
+		DISC_Rotate_Clockwise(1000);
+		Trackinghou();
+		HAL_Delay(1000);
+		Tracking2();
+		HAL_Delay(100);
+		youzhuan1();
+		HAL_Delay(100);
+		Tracking();
+		HAL_Delay(100);
+		Tracking3();
+		tuituitui();
+		HAL_Delay(1000);
+		MG90S_Rotate_up4();
+		HAL_Delay(1000);
+		Trackinghou();
+		Tracking2();
+		HAL_Delay(100);
+		zuozhuan1();
+		DISC_Rotate_Anticlockwise(150);
+	}
+else if(color==5)
+	{
+		DISC_Rotate_Clockwise(1000);
+		Trackinghou();
+		HAL_Delay(1000);
+		Tracking2();
+		HAL_Delay(100);
+		youzhuan2();
+		HAL_Delay(100);
+		Tracking();
+		HAL_Delay(100);
+		Tracking3();
+		tuituitui();
+		HAL_Delay(1000);
+		MG90S_Rotate_up4();
+		HAL_Delay(1000);
+		Trackinghou();
+		Tracking2();
+		HAL_Delay(100);
+		zuozhuan2();
+		DISC_Rotate_Anticlockwise(150);
+	}
   /* Infini__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,1000);te loop */
 
   while (1)

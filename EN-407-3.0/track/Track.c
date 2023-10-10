@@ -106,17 +106,17 @@ else if ( (HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_Rea
 else if ( (HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0||
 					(HAL_GPIO_ReadPin(huidu12_GPIO_Port,huidu12_Pin)) == 1)
 {
-	//ÓÒ×ª  
-	you_set_speed_1 = 60;
-	zuo_set_speed_2 = 40;
+	//ÓÒ×ª
+	you_set_speed_1 = 55;
+	zuo_set_speed_2 = 45;
 	car_go_straight();
 }
 else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 1 ||
 				(HAL_GPIO_ReadPin(huidu16_GPIO_Port,huidu16_Pin)) == 1  )
 {
 	//×ó×ª
-	you_set_speed_1 = 40;
-	zuo_set_speed_2 = 60;
+	you_set_speed_1 = 45;
+	zuo_set_speed_2 = 55;
 	car_go_straight();
 }
 //else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0)
@@ -185,7 +185,7 @@ else if ( (HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 1 &&(HAL_GPIO_Rea
 {
 	//×ó×ª
 	you_set_speed_1 = 60;
-	zuo_set_speed_2 = 0;
+	zuo_set_speed_2 = 40;
 	car_go_after();
 	flag_ = 1;
 }
@@ -193,7 +193,7 @@ else if((HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 0 &&(HAL_GPIO_ReadP
 {
 	//ÓÒ×ª
 	
-	you_set_speed_1 = 0;
+	you_set_speed_1 = 40;
 	zuo_set_speed_2 = 60;
 	car_go_after();
 	flag_ = 2;
@@ -201,7 +201,7 @@ else if((HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 0 &&(HAL_GPIO_ReadP
 
 }}
 	 
-void zuozhuan(void)
+void zuozhuan1(void)
 {
 PID_clear(&motor[0]);
 PID_clear(&motor[1]);
@@ -216,7 +216,7 @@ int16_t i;
 	while(1)
 	{
 		a++;
-		if (a>37)
+		if (a> 18)
 		{
 			car_go_ahead();
 			break;
@@ -239,6 +239,116 @@ int16_t i;
 		}
 		 }
 	 }
+
+	 
+void zuozhuan2(void)
+{
+PID_clear(&motor[0]);
+PID_clear(&motor[1]);
+		you_set_speed_1 = 30;
+		zuo_set_speed_2 = 30;
+		Tracking_Init();
+		int a = 0;
+	while(1)
+	{
+		a++;
+		if (a> 37)
+		{
+			car_go_ahead();
+			break;
+		}
+		else 
+		{
+		speed1 = GetEncoderSpeed(TIM3->CNT);
+		TIM3->CNT=0;
+    speed2 = GetEncoderSpeed(TIM1->CNT);
+		TIM1->CNT=0;
+		feedback_1 = speed1;//ÓÒÂÖ
+		feedback_2 = speed2;
+		turn_left();
+		PID_calc(&motor[0], feedback_1, you_set_speed_1);
+		PID_calc(&motor[1], feedback_2, zuo_set_speed_2);
+		TIM9->CCR1= motor[0].out;
+		TIM9->CCR2= motor[1].out;
+		HAL_Delay(50);
+		turn_left();
+		}
+		 }
+	 }
+
+	 void youzhuan1(void)
+{
+PID_clear(&motor[0]);
+PID_clear(&motor[1]);
+
+		you_set_speed_1 = 30;
+		zuo_set_speed_2 = 30;
+		Tracking_Init();
+		int a = 0;
+	while(1)
+	{
+		a++;
+		if (a> 18)
+		{
+			car_go_ahead();
+			break;
+		}
+		else 
+		{
+		speed1 = GetEncoderSpeed(TIM3->CNT);
+		TIM3->CNT=0;
+    speed2 = GetEncoderSpeed(TIM1->CNT);
+		TIM1->CNT=0;
+		feedback_1 = speed1;//ÓÒÂÖ
+		feedback_2 = speed2;
+		turn_right();
+		PID_calc(&motor[0], feedback_1, you_set_speed_1);
+		PID_calc(&motor[1], feedback_2, zuo_set_speed_2);
+		TIM9->CCR1= motor[0].out;
+		TIM9->CCR2= motor[1].out;
+		HAL_Delay(50);
+		turn_right();
+		}
+		 }
+	 }
+
+	 
+	  void youzhuan2(void)
+{
+PID_clear(&motor[0]);
+PID_clear(&motor[1]);
+
+		you_set_speed_1 = 30;
+		zuo_set_speed_2 = 30;
+		Tracking_Init();
+		int a = 0;
+	while(1)
+	{
+		a++;
+		if (a> 37)
+		{
+			car_go_ahead();
+			break;
+		}
+		else 
+		{
+		speed1 = GetEncoderSpeed(TIM3->CNT);
+		TIM3->CNT=0;
+    speed2 = GetEncoderSpeed(TIM1->CNT);
+		TIM1->CNT=0;
+		feedback_1 = speed1;//ÓÒÂÖ
+		feedback_2 = speed2;
+		turn_right();
+		PID_calc(&motor[0], feedback_1, you_set_speed_1);
+		PID_calc(&motor[1], feedback_2, zuo_set_speed_2);
+		TIM9->CCR1= motor[0].out;
+		TIM9->CCR2= motor[1].out;
+		HAL_Delay(50);
+		turn_right();
+		}
+		 }
+	 }
+
 
 	 void Tracking2(void)
 {
@@ -271,20 +381,123 @@ int16_t i;
 
 
 
+void tuituitui(void)
+{
+
+PID_clear(&motor[0]);
+PID_clear(&motor[1]);
+
+//		set_speed_1 = 60;
+//		set_speed_2 = 60;
+		Tracking_Init();
+
+while(1)
+{
+    speed1 = GetEncoderSpeed(TIM3->CNT);
+		TIM3->CNT=0;
+    speed2 = GetEncoderSpeed(TIM1->CNT);
+		TIM1->CNT=0;
+		feedback_1 = speed1;//ÓÒÂÖ
+		feedback_2 = speed2;
+
+		PID_calc(&motor[0], feedback_1, you_set_speed_1);
+		PID_calc(&motor[1], feedback_2, zuo_set_speed_2);
+		TIM9->CCR1= motor[0].out;
+		TIM9->CCR2= motor[1].out;
+//car_go_straight();
+//	car_go_right();
+
+		HAL_Delay(50);
+	
+	flag[0] = (HAL_GPIO_ReadPin(huidu11_GPIO_Port,huidu11_Pin));
+	flag[1] = (HAL_GPIO_ReadPin(huidu12_GPIO_Port,huidu12_Pin));
+	flag[2] = (HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin));
+
+	flag[3] = (HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin));
+
+	flag[4] = (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin));
+
+	flag[5] = (HAL_GPIO_ReadPin(huidu16_GPIO_Port,huidu16_Pin));
+	
+	flag[6] = (HAL_GPIO_ReadPin(huidu17_GPIO_Port,huidu17_Pin));
+
+	flag[7] = (HAL_GPIO_ReadPin(huidu21_GPIO_Port,huidu21_Pin));
+	flag[8] = (HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin));
+	flag[9] = (HAL_GPIO_ReadPin(huidu23_GPIO_Port,huidu23_Pin));
+	flag[10] = (HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin));
+	flag[11] = (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin));
+	flag[12] = (HAL_GPIO_ReadPin(huidu26_GPIO_Port,huidu26_Pin));
+	flag[13] = (HAL_GPIO_ReadPin(huidu27_GPIO_Port,huidu27_Pin));
+if((HAL_GPIO_ReadPin(huidu12_GPIO_Port,huidu12_Pin)) == 1 || (HAL_GPIO_ReadPin(huidu16_GPIO_Port,huidu16_Pin)) == 1)
+{
+	car_go_ahead();
+   break;
+
+}
+else if ( (HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0 
+||	(HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 1 )
+{
+	//Ö±×ß
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 60;
+	car_go_straight();
+}
+else if ( (HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0||
+					(HAL_GPIO_ReadPin(huidu12_GPIO_Port,huidu12_Pin)) == 1)
+{
+	//ÓÒ×ª
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 40;
+	car_go_straight();
+}
+else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 1 ||
+				(HAL_GPIO_ReadPin(huidu16_GPIO_Port,huidu16_Pin)) == 1  )
+{
+	//×ó×ª
+	you_set_speed_1 = 40;
+	zuo_set_speed_2 = 60;
+	car_go_straight();
+}
+//else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0)
+//{
+//	//stop
+//		 car_go_ahead();
+//	HAL_Delay (500);
+//	
+//}
+		 }
+}
+
 
 
  void Tracking3(void)
  {
-	 while(1)
-	 {
-//		 js1=(short)TIM3->CNT;
-//		TIM3->CNT=0;
-//    speed1 = ((float)js1*3.1415926*2*0.0334)/(0.00091*1350);
-	 car_go_left();
-		 if((HAL_GPIO_ReadPin(huidu11_GPIO_Port,huidu11_Pin)==0)&&(HAL_GPIO_ReadPin(huidu17_GPIO_Port,huidu17_Pin)==0)&&(HAL_GPIO_ReadPin(huidu21_GPIO_Port,huidu21_Pin)==0)&&(HAL_GPIO_ReadPin(huidu27_GPIO_Port,huidu27_Pin)==0))
-		 {
-			 break;
-		 }
-	 }
+
+	int a = 0;
+		while(1)
+	{
+		a++;
+		if (a>10)
+		{
+			car_go_ahead();
+			break;
+		}
+		else 
+		{
+		speed1 = GetEncoderSpeed(TIM3->CNT);
+		TIM3->CNT=0;
+    speed2 = GetEncoderSpeed(TIM1->CNT);
+		TIM1->CNT=0;
+		feedback_1 = speed1;//ÓÒÂÖ
+		feedback_2 = speed2;
+		PID_calc(&motor[0], feedback_1, you_set_speed_1);
+		PID_calc(&motor[1], feedback_2, zuo_set_speed_2);
+		TIM9->CCR1= motor[0].out;
+		TIM9->CCR2= motor[1].out;
+		HAL_Delay(50);
+	car_go_straight();
+		}		
+	}
+}
 	 
- }
+ 
