@@ -141,14 +141,23 @@ HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 
 HAL_TIM_Base_Start_IT(&htim6);
 		 whitebalance();
+HAL_Delay(1000);
   /* USER CODE END 2 */
-
+MG90S_Rotate_down4();
+HAL_Delay(100);
+DISC_Rotate_Anticlockwise(500);
+HAL_Delay(1000);
+color=rgb();
+if(color==1)
+{
+	DISC_Rotate_Clockwise(500);
+}
   /* Infini__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,1000);te loop */
 
   while (1)
   {
     /* USER CODE END WHILE */
-
+		
     /* USER CODE BEGIN 3 */
 ////		SG90_Rotate_down1();
 //		HAL_Delay(1000);

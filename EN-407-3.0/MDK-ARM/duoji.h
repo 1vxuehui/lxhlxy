@@ -10,8 +10,8 @@ TIM4CH3 3ºÅ
 TIM4CH4 5ºÅ
 */
 
-void DISC_Rotate_Anticlockwise(void);
-void DISC_Rotate_Clockwise(void);
+void DISC_Rotate_Anticlockwise(int time);
+void DISC_Rotate_Clockwise(int time);
 
 
 void MG90S_Rotate_down1(void);

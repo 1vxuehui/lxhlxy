@@ -5,20 +5,24 @@
 
 
 //0,1500停止，大于1500为顺时针旋转，小于1500为逆时针旋转
-void DISC_Rotate_Anticlockwise()//逆时针
+void DISC_Rotate_Anticlockwise(int time)//逆时针
 {
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,1200);
-			HAL_Delay(1000);
+			HAL_Delay(time);
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,0);
 }
 
-void DISC_Rotate_Clockwise()//顺时针
+void DISC_Rotate_Clockwise(int time)//顺时针
 {
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,1700);
-			HAL_Delay(1000);
+			HAL_Delay(time);
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,0);
 }
-
+/*
+关于time取值：
+700：中后方到颜色传感器
+???：颜色传感器到中后方（未测试）
+*/
 
 //1000下 2000上
 void MG90S_Rotate_up1(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_1,2000);}
