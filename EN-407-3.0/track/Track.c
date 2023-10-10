@@ -119,6 +119,13 @@ else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadP
 	zuo_set_speed_2 = 55;
 	car_go_straight();
 }
+else
+{
+//直走
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 60;
+	car_go_straight();
+}
 //else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0)
 //{
 //	//stop
@@ -198,8 +205,16 @@ else if((HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 0 &&(HAL_GPIO_ReadP
 	car_go_after();
 	flag_ = 2;
 }
+else
+{
+	//后
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 60;
+	car_go_after();
+}
 
-}}
+}
+}
 	 
 void zuozhuan1(void)
 {
@@ -216,7 +231,7 @@ int16_t i;
 	while(1)
 	{
 		a++;
-		if (a> 18)
+		if (a> 17)
 		{
 			car_go_ahead();
 			break;
@@ -288,7 +303,7 @@ PID_clear(&motor[1]);
 	while(1)
 	{
 		a++;
-		if (a> 18)
+		if (a> 19)
 		{
 			car_go_ahead();
 			break;
@@ -325,7 +340,7 @@ PID_clear(&motor[1]);
 	while(1)
 	{
 		a++;
-		if (a> 37)
+		if (a> 39)
 		{
 			car_go_ahead();
 			break;
@@ -352,7 +367,7 @@ PID_clear(&motor[1]);
 
 	 void Tracking2(void)
 {
-	int a = 0;
+	int a = 0; 
 		while(1)
 	{
 		a++;
@@ -458,6 +473,13 @@ else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadP
 	zuo_set_speed_2 = 60;
 	car_go_straight();
 }
+else
+	{
+	//直走
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 60;
+	car_go_straight();
+}
 //else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0)
 //{
 //	//stop
@@ -500,4 +522,78 @@ else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadP
 	}
 }
 	 
- 
+void Tracking4(void)
+{
+	PID_clear(&motor[0]);
+PID_clear(&motor[1]);
+
+//		set_speed_1 = 60;
+//		set_speed_2 = 60;
+		Tracking_Init();
+	int a = 0; 
+		while(1)
+	{
+		a++;
+    speed1 = GetEncoderSpeed(TIM3->CNT);
+		TIM3->CNT=0;
+    speed2 = GetEncoderSpeed(TIM1->CNT);
+		TIM1->CNT=0;
+		feedback_1 = speed1;
+		feedback_2 = speed2;
+
+		PID_calc(&motor[0], feedback_1, you_set_speed_1);
+		PID_calc(&motor[1], feedback_2, zuo_set_speed_2);
+		TIM9->CCR1= motor[0].out;
+		TIM9->CCR2= motor[1].out;
+//car_go_straight();
+//	car_go_right();
+
+		HAL_Delay(50);
+	
+	
+if (a>100)
+		{
+			car_go_ahead();
+			break;
+		}
+
+else if ( (HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin)) == 0  )
+{
+	//后
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 60;
+	car_go_after();
+}
+else if ( (HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin)) == 0  )
+{
+	//后
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 60;
+	car_go_after();
+}
+else if ( (HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin)) == 0)
+{
+	//左转
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 40;
+	car_go_after();
+	flag_ = 1;
+}
+else if((HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin)) == 1)
+{
+	//右转
+	
+	you_set_speed_1 = 40;
+	zuo_set_speed_2 = 60;
+	car_go_after();
+	flag_ = 2;
+}
+else
+	{
+	//后
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 60;
+	car_go_after();
+}
+	}
+} 
