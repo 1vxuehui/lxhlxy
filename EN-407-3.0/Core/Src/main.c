@@ -22,7 +22,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-#include "tsc2300.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Track.h"
@@ -131,22 +131,25 @@ int main(void)
 HAL_TIM_PWM_Start(&htim9,TIM_CHANNEL_1);
 HAL_TIM_PWM_Start(&htim9,TIM_CHANNEL_2);
 HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
 HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
-//HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_4);
+HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_1);
+HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_2);
+HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);
+HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_4);
 HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
 HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 
 HAL_TIM_Base_Start_IT(&htim6);
 		 whitebalance();
   /* USER CODE END 2 */
-  /* Infinite loop */
-	while (1)
-  {
-//		Tracking();
-//    /* USER CODE END WHILE */
 
-//    /* USER CODE BEGIN 3 */
+  /* Infini__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,1000);te loop */
+
+  while (1)
+  {
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
 ////		SG90_Rotate_down1();
 //		HAL_Delay(1000);
 
