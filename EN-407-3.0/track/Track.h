@@ -17,6 +17,7 @@ extern void Tracking1(void);
 extern void Tracking2(void);
 extern void Tracking3(void);
 extern void Tracking4(void);
+extern void Tracking5(void);
 extern void Trackinghou_transmit(void);
 extern void Trackinghou(void);
 extern void zuozhuan1(void);

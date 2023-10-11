@@ -267,7 +267,7 @@ PID_clear(&motor[1]);
 	while(1)
 	{
 		a++;
-		if (a> 37)
+		if (a> 36)
 		{
 			car_go_ahead();
 			break;
@@ -340,7 +340,7 @@ PID_clear(&motor[1]);
 	while(1)
 	{
 		a++;
-		if (a> 39)
+		if (a> 38)
 		{
 			car_go_ahead();
 			break;
@@ -361,12 +361,18 @@ PID_clear(&motor[1]);
 		HAL_Delay(50);
 		turn_right();
 		}
-		 }
-	 }
+	}
+}
 
 
 	 void Tracking2(void)
 {
+//	PID_clear(&motor[0]);
+//PID_clear(&motor[1]);
+
+//		you_set_speed_1 = 30;
+//		zuo_set_speed_2 = 30;
+//		Tracking_Init();
 	int a = 0; 
 		while(1)
 	{
@@ -494,7 +500,12 @@ else
 
  void Tracking3(void)
  {
+PID_clear(&motor[0]);
+PID_clear(&motor[1]);
 
+		you_set_speed_1 = 30;
+		zuo_set_speed_2 = 30;
+		Tracking_Init();
 	int a = 0;
 		while(1)
 	{
@@ -597,3 +608,37 @@ else
 }
 	}
 } 
+void Tracking5(void)
+{
+	PID_clear(&motor[0]);
+PID_clear(&motor[1]);
+
+		you_set_speed_1 = 30;
+		zuo_set_speed_2 = 30;
+		Tracking_Init();
+	int a = 0; 
+		while(1)
+	{
+		a++;
+		if (a>10)
+		{
+			car_go_ahead();
+			break;
+		}
+		else 
+		{
+		speed1 = GetEncoderSpeed(TIM3->CNT);
+		TIM3->CNT=0;
+    speed2 = GetEncoderSpeed(TIM1->CNT);
+		TIM1->CNT=0;
+		feedback_1 = speed1;//ÓÒÂÖ
+		feedback_2 = speed2;
+		PID_calc(&motor[0], feedback_1, you_set_speed_1);
+		PID_calc(&motor[1], feedback_2, zuo_set_speed_2);
+		TIM9->CCR1= motor[0].out;
+		TIM9->CCR2= motor[1].out;
+		HAL_Delay(50);
+		car_go_after();	
+		}		
+	}
+}

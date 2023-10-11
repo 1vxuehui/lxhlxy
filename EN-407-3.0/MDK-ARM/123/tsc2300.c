@@ -16,6 +16,7 @@ uint16_t y;
 uint8_t red_flag;
 uint8_t white_flag=0;
 uint16_t x[3];
+uint16_t r_t=143,g_t=151,b_t=181;//赛前实地测试读白平衡数组x[3]填好这三个值
 
 EXTI_HandleTypeDef l;
 
@@ -100,7 +101,7 @@ uint16_t tcs2300_RED(void)
 //	S2=0;S3=0;
 	amount=0;
 	HAL_Delay(10);
-	Ramount=(uint32_t) amount*255/x[0];	 //取R值
+	Ramount=(uint32_t) amount*255/r_t;	 //取R值
 	if(Ramount>255) Ramount = 255;
 	return Ramount;
 //	amount=0;
@@ -113,7 +114,7 @@ uint16_t tcs2300_GREEN(void)
 //	S2=1;S3=1;
 	amount=0;
 	HAL_Delay(10);
-	Gamount=(uint32_t) amount*255/x[1];	//取G值
+	Gamount=(uint32_t) amount*255/g_t;	//取G值
 	if(Gamount>255) Gamount = 255;
 	return Gamount;
 //	amount=0;
@@ -126,7 +127,7 @@ uint16_t tcs2300_BLUE(void)
 //	S2=0;S3=1;
 	amount=0;
 	HAL_Delay(10);
-	Bamount=(uint32_t) amount*255/x[2];//取B值
+	Bamount=(uint32_t) amount*255/b_t;//取B值
 	if(Bamount>255) Bamount = 255;
 	return Bamount;
 //	amount=0;
@@ -135,15 +136,35 @@ uint16_t tcs2300_BLUE(void)
 
 	uint16_t rgb(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
 {
-	float R=0,G=0,B=0;
-	tcs2300_RED();
-	tcs2300_GREEN();	  
-	tcs2300_BLUE();	
+	float H,L,R,G,B;
+	float max,min;
 	R=tcs2300_RED();
 	G=tcs2300_GREEN();
 	B=tcs2300_BLUE();
 	
-	if(R>220 && G>220 && B>220)//白色
+	//计算最大值
+	if(R==G&&G==B)	max = 1;
+	else if(R>=G&&R>=B)	max = R;
+	else if(G>=R&&G>=B)	max = G;
+	else if(B>=G&&B>=R)	max = B;
+	else	max = 0;
+	//计算最小值
+	if(R==G&&G==B)	min = 1;
+	else if(R<=G&&R<=B)	min = R;
+	else if(G<=R&&G<=B)	min = G;
+	else if(B<=G&&B<=R)	min = B;
+	else	min = 0;
+	//计算色相H
+	if(max==R)	H = 60*((G-B)/(max-min));
+	if(max==G)	H = 60*((B-R)/(max-min))+120;
+	if(max==B)	H = 60*((R-G)/(max-min))+240;
+	if(max==min)	H = 0;
+	//如果H为负，则+360，修正为正数
+	if(H<0)	H+=360;		
+	//计算亮度L
+	L =(max+min)/2;
+	
+	if(R>200 && G>200 && B>200 && H>300)//白色
 	{
 		return 2;
 	}
@@ -155,7 +176,7 @@ uint16_t tcs2300_BLUE(void)
 	{
 		return 3;
 	}
-	else if(G>R && G>B)//绿色
+	else if(G>R && G>B && H<160)//绿色
 	{
 		return 1;
 	}
@@ -221,7 +242,7 @@ void tsc2300(void)
 		car_go_straight();
 		HAL_Delay(500);
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
-		HAL_Delay(50);
+  		HAL_Delay(50);
 		Tracking2();
 	}
 

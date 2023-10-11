@@ -64,8 +64,9 @@ void SystemClock_Config(void);
 
 
 
-float R=0,G=0,B=0;
+float H,L,R,G,B;
 int color;
+float max,min;
 //pid_type_def motor[2];-
 //const static fp32 motor_speed_pid[3] = {MOTOR_SPEED_PID_KP, MOTOR_SPEED_PID_KI, MOTOR_SPEED_PID_KD};
 //const static fp32 motor_angle_pid[3] = {MOTOR_ANGLE_PID_KP,MOTOR_ANGLE_PID_KI, MOTOR_ANGLE_PID_KD};
@@ -142,392 +143,406 @@ HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 HAL_TIM_Base_Start_IT(&htim6);
 whitebalance();
 HAL_Delay(3000);
-  /* USER CODE END 2 */
-Tracking();
-HAL_Delay(1000);
-MG90S_Rotate_down4();
-HAL_Delay(100);
-DISC_Rotate_Anticlockwise(500);
-HAL_Delay(1000);
-color=rgb();
-if(color==1)//C线
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan2();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan2();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==2)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan1();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan1();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==3)
-	{
-		DISC_Rotate_Clockwise(1000);
-		HAL_Delay(1000);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==4)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan1();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan1();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==5)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan2();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan2();
-		DISC_Rotate_Anticlockwise(105);
-	}
-	
-	
-	
-HAL_Delay(1000);
-youzhuan2();
-HAL_Delay(1000);
-Tracking();
-HAL_Delay(1000);
-MG90S_Rotate_down4();
-HAL_Delay(100);
-DISC_Rotate_Anticlockwise(500);
-HAL_Delay(1000);
-color=rgb();
-if(color==1)//E线
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan2();
-		HAL_Delay(100);
-		zuozhuan2();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan2();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==2)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan2();
-		HAL_Delay(100);
-		zuozhuan1();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan1();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==3)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan2();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==4)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan1();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan1();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==5)
-	{
-		DISC_Rotate_Clockwise(1000);
-		HAL_Delay(1000);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan2();
-		DISC_Rotate_Anticlockwise(105);
-	}
-	
-	
-	
-HAL_Delay(1000);
-zuozhuan2();
-HAL_Delay(1000);
-Tracking();
-HAL_Delay(1000);
-MG90S_Rotate_down4();
-HAL_Delay(100);
-DISC_Rotate_Anticlockwise(500);
-HAL_Delay(1000);
-color=rgb();	
-if(color==1)//A线
-	{
-		DISC_Rotate_Clockwise(1000);
-		HAL_Delay(1000);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan2();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==2)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan1();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan1();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==3)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan2();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==4)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan2();
-		HAL_Delay(100);
-		youzhuan1();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan1();
-		DISC_Rotate_Anticlockwise(105);
-	}
-else if(color==5)
-	{
-		DISC_Rotate_Clockwise(1000);
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan2();
-		HAL_Delay(100);
-		youzhuan2();
-		HAL_Delay(100);
-		Tracking();
-		HAL_Delay(100);
-		Tracking3();
-		tuituitui();
-		HAL_Delay(1000);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan2();
-		DISC_Rotate_Anticlockwise(105);
-	}
-	Tracking4();
+/* USER CODE END 2 */
+
   /* Infini__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,1000);te loop */
 
   while (1)
   {
     /* USER CODE END WHILE */
-		
-    /* USER CODE BEGIN 3 */
-////		SG90_Rotate_down1();
-//		HAL_Delay(1000);
-
-//	  Trackinghou();
-//		HAL_Delay(2000);
-//		Tracking2();
-//		HAL_Delay(5);
-
-//		zuozhuan();
-		
+	R=tcs2300_RED();
+	G=tcs2300_GREEN();
+	B=tcs2300_BLUE();
+	
+	//计算最大值
+	if(R==G&&G==B)	max = 1;
+	else if(R>=G&&R>=B)	max = R;
+	else if(G>=R&&G>=B)	max = G;
+	else if(B>=G&&B>=R)	max = B;
+	else	max = 0;
+	//计算最小值
+	if(R==G&&G==B)	min = 1;
+	else if(R<=G&&R<=B)	min = R;
+	else if(G<=R&&G<=B)	min = G;
+	else if(B<=G&&B<=R)	min = B;
+	else	min = 0;
+	//计算色相H
+	if(max==R)	H = 60*((G-B)/(max-min));
+	if(max==G)	H = 60*((B-R)/(max-min))+120;
+	if(max==B)	H = 60*((R-G)/(max-min))+240;
+	if(max==min)	H = 0;
+	//如果H为负，则+360，修正为正数
+	if(H<0)	H+=360;		
+	//计算亮度L
+	L =(max+min)/2;
+    /* USER CODE BEGIN 3 */	
 HAL_Delay(1000);
 		
-//		//Tracking2();
-//		car_go_after();
-//   // HAL_Delay(300);
-//		car_go_ahead();
-//	 // HAL_Delay(1000);
-//		car_go_after();
-//	 // gbggbHAL_Delay(250);
-//		Tracking2();
-//		car_go_after();
-//   // HAL_Delay(300);
-//		car_go_ahead();
-//	  //HAL_Delay(1000);
-//		car_go_left();
-//		//HAL_Delay(500);
-//		car_go_ahead();
 	}  
   /* USER CODE END 3 */
 }
-
+//Tracking();
+//HAL_Delay(1000);
+//MG90S_Rotate_down4();
+//HAL_Delay(100);
+//DISC_Rotate_Anticlockwise(500);
+//HAL_Delay(1000);
+//color=rgb();
+//if(color==1)//C线
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan2();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan2();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==2)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan1();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan1();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==3)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		HAL_Delay(1000);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==4)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan1();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan1();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==5)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan2();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan2();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//	
+//	
+//	
+//HAL_Delay(1000);
+//youzhuan2();
+//HAL_Delay(1000);
+//Tracking();
+//HAL_Delay(1000);
+//MG90S_Rotate_down4();
+//HAL_Delay(100);
+//DISC_Rotate_Anticlockwise(500);
+//HAL_Delay(1000);
+//color=rgb();
+//if(color==1)//E线
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan2();
+//		HAL_Delay(100);
+//		zuozhuan2();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan2();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==2)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan2();
+//		HAL_Delay(100);
+//		zuozhuan1();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan1();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==3)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan2();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==4)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan1();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan1();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==5)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		HAL_Delay(1000);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan2();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//	
+//	
+//	
+//HAL_Delay(1000);
+//zuozhuan2();
+//HAL_Delay(1000);
+//Tracking();
+//HAL_Delay(1000);
+//MG90S_Rotate_down4();
+//HAL_Delay(100);
+//DISC_Rotate_Anticlockwise(500);
+//HAL_Delay(1000);
+//color=rgb();	
+//if(color==1)//A线
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		HAL_Delay(1000);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan2();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==2)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan1();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan1();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==3)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan2();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==4)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan2();
+//		HAL_Delay(100);
+//		youzhuan1();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan1();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//else if(color==5)
+//	{
+//		DISC_Rotate_Clockwise(1000);
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(100);
+//		youzhuan2();
+//		HAL_Delay(100);
+//		youzhuan2();
+//		HAL_Delay(100);
+//		Tracking();
+//		HAL_Delay(100);
+//		Tracking3();
+//		tuituitui();
+//		HAL_Delay(1000);
+//		Tracking5();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		Tracking2();
+//		HAL_Delay(100);
+//		zuozhuan2();
+//		DISC_Rotate_Anticlockwise(105);
+//	}
+//	Tracking4();
 /**
   * @brief System Clock Configuration
   * @retval None

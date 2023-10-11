@@ -22,10 +22,5 @@ uint16_t tcs2300_RED(void);
 uint16_t tcs2300_GREEN(void);
 uint16_t tcs2300_BLUE(void);
 uint16_t rgb(void);
-uint16_t a(void);
-uint16_t b(void);
-uint16_t c(void);
-uint16_t f(void);
-uint16_t e(void);
 
 #endif
