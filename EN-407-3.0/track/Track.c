@@ -6,7 +6,7 @@
 
 extern TIM_HandleTypeDef htim6;
 int16_t speed,speed1,speed2;
-
+int angle1, angle2;
 int16_t feedback_1;
 int16_t feedback_2;
 int16_t you_set_speed_1;
@@ -218,21 +218,23 @@ else
 	 
 void zuozhuan1(void)
 {
+	
 PID_clear(&motor[0]);
 PID_clear(&motor[1]);
-
+angle1 =0;
+	angle2=0;
 		you_set_speed_1 = 30;
 		zuo_set_speed_2 = 30;
 		Tracking_Init();
-int16_t i;
-		int a = 0;
-//	for(i = 0; i > 30000 ; i++)
-//	{
+
 	while(1)
 	{
-		a++;
-		if (a> 17)
+	angle1+=speed1;
+		angle2+=speed2;
+		if ((angle1>=350||angle2>=350)&&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1)
 		{
+			angle1=0;
+		angle2=0;
 			car_go_ahead();
 			break;
 		}
@@ -260,21 +262,27 @@ void zuozhuan2(void)
 {
 PID_clear(&motor[0]);
 PID_clear(&motor[1]);
+	angle1 =0;
+	angle2=0;
 		you_set_speed_1 = 30;
 		zuo_set_speed_2 = 30;
 		Tracking_Init();
-		int a = 0;
+	
 	while(1)
 	{
-		a++;
-		if (a> 36)
+		angle1+=speed1;
+		angle2+=speed2;
+		if ((angle1>=700||angle2>=700)&&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1)
 		{
+			angle1=0;
+		angle2=0;
 			car_go_ahead();
 			break;
 		}
 		else 
 		{
 		speed1 = GetEncoderSpeed(TIM3->CNT);
+			
 		TIM3->CNT=0;
     speed2 = GetEncoderSpeed(TIM1->CNT);
 		TIM1->CNT=0;
@@ -295,19 +303,24 @@ PID_clear(&motor[1]);
 {
 PID_clear(&motor[0]);
 PID_clear(&motor[1]);
-
+angle1 =0;
+	angle2=0;
 		you_set_speed_1 = 30;
 		zuo_set_speed_2 = 30;
 		Tracking_Init();
-		int a = 0;
+	
 	while(1)
 	{
-		a++;
-		if (a> 19)
+		angle1+=speed1;
+		angle2+=speed2;
+		if ((angle1>=385||angle2>=385)&&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1)
 		{
+			angle1=0;
+		angle2=0;
 			car_go_ahead();
 			break;
 		}
+		
 		else 
 		{
 		speed1 = GetEncoderSpeed(TIM3->CNT);
@@ -332,22 +345,27 @@ PID_clear(&motor[1]);
 {
 PID_clear(&motor[0]);
 PID_clear(&motor[1]);
-
+angle1 =0;
+	angle2=0;
 		you_set_speed_1 = 30;
 		zuo_set_speed_2 = 30;
 		Tracking_Init();
-		int a = 0;
+		
 	while(1)
 	{
-		a++;
-		if (a> 38)
+		angle1+=speed1;
+		angle2+=speed2;
+			if ((angle1>=700||angle2>=700)&&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1)
 		{
+			angle1=0;
+			angle2=0;
 			car_go_ahead();
 			break;
 		}
 		else 
 		{
 		speed1 = GetEncoderSpeed(TIM3->CNT);
+			
 		TIM3->CNT=0;
     speed2 = GetEncoderSpeed(TIM1->CNT);
 		TIM1->CNT=0;
@@ -361,8 +379,8 @@ PID_clear(&motor[1]);
 		HAL_Delay(50);
 		turn_right();
 		}
-	}
-}
+		 }
+	 }
 
 
 	 void Tracking2(void)

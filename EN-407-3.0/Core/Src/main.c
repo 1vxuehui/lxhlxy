@@ -150,31 +150,7 @@ HAL_Delay(3000);
   while (1)
   {
     /* USER CODE END WHILE */
-	R=tcs2300_RED();
-	G=tcs2300_GREEN();
-	B=tcs2300_BLUE();
-	
-	//计算最大值
-	if(R==G&&G==B)	max = 1;
-	else if(R>=G&&R>=B)	max = R;
-	else if(G>=R&&G>=B)	max = G;
-	else if(B>=G&&B>=R)	max = B;
-	else	max = 0;
-	//计算最小值
-	if(R==G&&G==B)	min = 1;
-	else if(R<=G&&R<=B)	min = R;
-	else if(G<=R&&G<=B)	min = G;
-	else if(B<=G&&B<=R)	min = B;
-	else	min = 0;
-	//计算色相H
-	if(max==R)	H = 60*((G-B)/(max-min));
-	if(max==G)	H = 60*((B-R)/(max-min))+120;
-	if(max==B)	H = 60*((R-G)/(max-min))+240;
-	if(max==min)	H = 0;
-	//如果H为负，则+360，修正为正数
-	if(H<0)	H+=360;		
-	//计算亮度L
-	L =(max+min)/2;
+
     /* USER CODE BEGIN 3 */	
 HAL_Delay(1000);
 		

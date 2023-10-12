@@ -134,7 +134,7 @@ uint16_t tcs2300_BLUE(void)
 
 }
 
-	uint16_t rgb(void)//不稳定版，用的时候多delay几秒，给他足够识别时间
+	uint16_t rgb(void)//一个完善的颜色识别函数
 {
 	float H,L,R,G,B;
 	float max,min;
