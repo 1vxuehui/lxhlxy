@@ -18,11 +18,16 @@ extern void Tracking2(void);
 extern void Tracking3(void);
 extern void Tracking4(void);
 extern void Tracking5(void);
+extern void Tracking6(void);
+extern void Tracking7(void);
 extern void Trackinghou_transmit(void);
 extern void Trackinghou(void);
+extern void Trackinghou2(void);
 extern void zuozhuan1(void);
 extern void zuozhuan2(void);
+extern void zuozhuan3(void);
 extern void youzhuan1(void);
 extern void youzhuan2(void);
+extern void youzhuan3(void);
 extern void tuituitui(void);
 #endif

@@ -101,13 +101,13 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 //ËÙ¶È»·pid
-#define MOTOR_SPEED2_PID_KP 100.0f
+#define MOTOR_SPEED2_PID_KP 130.0f
 #define MOTOR_SPEED2_PID_KI 	0.0f
-#define MOTOR_SPEED2_PID_KD 	4.0f
+#define MOTOR_SPEED2_PID_KD 	13.0f
 
-#define MOTOR_SPEED1_PID_KP  125.0f
+#define MOTOR_SPEED1_PID_KP  130.0f
 #define MOTOR_SPEED1_PID_KI  0.0f
-#define MOTOR_SPEED1_PID_KD  4.0f
+#define MOTOR_SPEED1_PID_KD  10.0f
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

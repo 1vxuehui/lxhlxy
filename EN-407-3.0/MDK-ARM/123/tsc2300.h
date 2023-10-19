@@ -1,5 +1,5 @@
-#ifndef __TCS3200_H
-#define __TCS3200_H
+#ifndef __TCS2300_H
+#define __TCS2300_H
 #include "main.h"
 
 extern uint16_t amount;
@@ -14,9 +14,10 @@ extern void tsc2300(void);
 //#define S3 PBout(13)
 //#define OUT PEin(4)
 
-void tsc2300(void);
+void tcs2300(int color_t);
 void whitebalance(void);
 void aj(void);
+void tcs2300_turn(int color_t);
 
 uint16_t tcs2300_RED(void);
 uint16_t tcs2300_GREEN(void);

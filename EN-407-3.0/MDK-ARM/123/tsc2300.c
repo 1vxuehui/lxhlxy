@@ -16,8 +16,9 @@ uint16_t y;
 uint8_t red_flag;
 uint8_t white_flag=0;
 uint16_t x[3];
-uint16_t r_t=143,g_t=151,b_t=181;//赛前实地测试读白平衡数组x[3]填好这三个值
-
+//赛前实地测试读白平衡数组x[3]填好这三个值
+//uint16_t r_t=86,g_t=90,b_t=110;//白天
+uint16_t r_t=72,g_t=74,b_t=87;//晚上
 EXTI_HandleTypeDef l;
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -164,25 +165,25 @@ uint16_t tcs2300_BLUE(void)
 	//计算亮度L
 	L =(max+min)/2;
 	
-	if(R>200 && G>200 && B>200 && H>300)//白色
+	if(R>200 && G>200 && B>200)//白色
 	{
 		return 2;
 	}
-	else if(R<35 && G<35 && B<35)//黑色
+		else if(G>R && G>B && H<200)//绿色
+	{
+		return 1;
+	}
+	else if(R<50 && G<50 && B<50)//黑色
 	{
 		return 4;
+	}
+	else if(B>G && B>R && H>200)//蓝色
+	{
+		return 5;
 	}
 	else if(R>G && R>B)//红色
 	{
 		return 3;
-	}
-	else if(G>R && G>B && H<160)//绿色
-	{
-		return 1;
-	}
-	else if(B>G && B>R)//蓝色
-	{
-		return 5;
 	}
    else
 	{
@@ -190,61 +191,49 @@ uint16_t tcs2300_BLUE(void)
 	}
 }
 
-void tsc2300(void)
+void tcs2300(int color_t)//前往对应颜色的分路，记得在
+{
+	switch(color_t)
 	{
-	if(rgb() == 1)//绿
-	{
-		car_go_left();
-		HAL_Delay(500);
-		Tracking();
-		car_go_straight();
-		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
-		HAL_Delay(50);
-		Tracking2();
+		case 1:
+			zuozhuan2();
+			Tracking5();
+			break;
+		case 2:
+			zuozhuan1();
+			Tracking5();
+			break;
+		case 3:
+			Tracking5();
+			break;
+		case 4:
+			youzhuan1();
+			Tracking5();
+			break;
+		case 5:
+			youzhuan2();
+			Tracking5();
+			break;
 	}
-		if(rgb() == 2)//白
-	{
-		Tracking();
-		car_go_straight();
-		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
-		HAL_Delay(50);
-		Tracking2();
-	}
-		if(rgb() == 3)//红
-	{
-		car_go_right();
-		HAL_Delay(500);
-		Tracking();
-		car_go_straight();
-		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
-		HAL_Delay(50);
-		Tracking2();
-	}
-			if(rgb() == 4)//黑
-	{
-		car_go_right();
-		HAL_Delay(1000);
-		Tracking();
-		car_go_straight();
-		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
-		HAL_Delay(50);
-		Tracking2();
-	}
-				if(rgb() == 5)//蓝
-	{
-		car_go_right();
-		HAL_Delay(1500);
-		Tracking();
-		car_go_straight();
-		HAL_Delay(500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1000);
-  		HAL_Delay(50);
-		Tracking2();
-	}
-
-		
 }
+	void tcs2300_turn(int color_t)
+{
+	switch(color_t)
+	{
+		case 1:
+			youzhuan2();
+			break;
+		case 2:
+			youzhuan1();
+			break;
+		case 3:
+			break;
+		case 4:
+			zuozhuan1();
+			break;
+		case 5:
+			zuozhuan2();
+			break;
+	}
+}
+
