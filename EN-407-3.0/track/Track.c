@@ -106,12 +106,17 @@ void Trackinghou(void)
 PID_clear(&motor[0]);
 PID_clear(&motor[1]);
 Tracking_Init();
+	angle1 =0;
+	angle2=0;
 while(1)
 {
     speed1 = GetEncoderSpeed(TIM3->CNT);
-		TIM3->CNT=0;
+	angle1 +=speed1;	
+	TIM3->CNT=0;
     speed2 = GetEncoderSpeed(TIM1->CNT);
-		TIM1->CNT=0;
+	angle2 +=speed2;	
+	TIM1->CNT=0;
+	
 		feedback_1 = speed1;
 		feedback_2 = speed2;
 		PID_calc(&motor[0], feedback_1, you_set_speed_1);
@@ -119,8 +124,10 @@ while(1)
 		TIM9->CCR1= motor[0].out;
 		TIM9->CCR2= motor[1].out;
 		HAL_Delay(50);
-if((HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin)) == 1 )
+if(((HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin)) == 1)&&((angle1>=1000)||(angle2>1000)) )
 {
+	angle1=0;
+	angle2=0;
 		car_go_ahead();
    break;	
 }
@@ -478,12 +485,18 @@ PID_clear(&motor[1]);
 	you_set_speed_1 = 40;
 	zuo_set_speed_2 = 40;
 	Tracking_Init();
-	int a = 0; 
+	angle1=0;
+	angle2=0;
 		while(1)
 	{
-		a++;
-		if (a>10)
+		angle1+=speed1;
+		angle2+=speed2;
+		
+		
+		if (angle1>=450&&angle2>=450)
 		{
+			angle1=0;
+			angle2=0;
 			car_go_ahead();
 			break;
 		}

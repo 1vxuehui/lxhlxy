@@ -18,7 +18,7 @@ uint8_t white_flag=0;
 uint16_t x[3];
 //赛前实地测试读白平衡数组x[3]填好这三个值
 //uint16_t r_t=86,g_t=90,b_t=110;//白天
-uint16_t r_t=72,g_t=74,b_t=87;//晚上
+uint16_t r_t=49,g_t=53,b_t=62;//晚上
 EXTI_HandleTypeDef l;
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -173,7 +173,7 @@ uint16_t tcs2300_BLUE(void)
 	{
 		return 1;
 	}
-	else if(R<50 && G<50 && B<50)//黑色
+	else if(R<60 && G<60 && B<60)//黑色
 	{
 		return 4;
 	}
