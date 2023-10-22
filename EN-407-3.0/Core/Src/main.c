@@ -153,20 +153,15 @@ HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 HAL_TIM_Base_Start_IT(&htim6);
 whitebalance();
 //任务开始
-//DISC_Rotate(2150);			//1在前
-//DISC_Rotate(1025);			//1识别
-//DISC_Rotate(400);				//2在前
-//	DISC_Rotate(1400);		//2识别
-//DISC_Rotate(900);					//3在前
-//DISC_Rotate(1800); 			  //3识别
-//	DISC_Rotate(1350);				//4在前
-//DISC_Rotate(2200);		//4识别	 
-//DISC_Rotate(1750);	 		//5在前
-//DISC_Rotate(1000);				//5识别
     /* USER CODE END WHILE */
 		/*任务1*/
 		DISC_Rotate(2150);
-	Tracking();
+		MG90S_Rotate_up1();
+		MG90S_Rotate_up2();
+		MG90S_Rotate_up3();
+		MG90S_Rotate_up4();
+		MG90S_Rotate_up5();
+		Tracking();
 
 		HAL_Delay(1000);
 		MG90S_Rotate_down1();		//舵机抓
@@ -203,13 +198,9 @@ whitebalance();
 		//放1
 		DISC_Rotate(2150);//1在前
 		HAL_Delay(500);
-		DISC_Rotate(500);//1在右
-		HAL_Delay(500);
-		DISC_Rotate(1025);//1颜色
+		DISC_Rotate(750);//1颜色
 		HAL_Delay(1000);
 		color = rgb();
-		DISC_Rotate(500);//1在右
-		HAL_Delay(500);
 		DISC_Rotate(2150);//1在前
 		HAL_Delay(100);
 		tcs2300(color);
@@ -231,13 +222,9 @@ whitebalance();
 		//放2
 		DISC_Rotate(400);//2在前
 		HAL_Delay(500);
-		DISC_Rotate(875);//2在右
-		HAL_Delay(500);
-		DISC_Rotate(1400);//2颜色
+		DISC_Rotate(1150);//2颜色
 		HAL_Delay(1000);
 		color = rgb();
-		DISC_Rotate(875);//2在右
-		HAL_Delay(500);
 		DISC_Rotate(400);//2在前
 		HAL_Delay(100);
 		tcs2300(color);
@@ -258,13 +245,13 @@ whitebalance();
 		HAL_Delay(1000);
 		//放3
 		DISC_Rotate(900);//3在前
-		HAL_Delay(500);
-		DISC_Rotate(1250);//3在右
+		HAL_Delay(500); 
+		DISC_Rotate(1350);//3在右
 		HAL_Delay(500);
 		DISC_Rotate(1800);//3颜色
 		HAL_Delay(1000);
 		color = rgb();
-		DISC_Rotate(1250);//3在右
+		DISC_Rotate(1350);//3在右
 		HAL_Delay(500);
 		DISC_Rotate(900);//3在前
 		HAL_Delay(100);
@@ -283,9 +270,10 @@ whitebalance();
 		Tracking2();
 		HAL_Delay(500);
 		tcs2300_turn(color);
-		DISC_Rotate(500);//1在右
-		HAL_Delay(500);
 		DISC_Rotate(2150);//1在前
+		
+		
+		
 		
 		/*任务2*/
 		//F区
@@ -293,14 +281,16 @@ whitebalance();
 		zuozhuan1();
 		HAL_Delay(1000);
 		Tracking6();
-		HAL_Delay(100);
+		HAL_Delay(1000);
+		Tracking7();
+		HAL_Delay(1000);
 		MG90S_Rotate_down1();
 		MG90S_Rotate_down2();
 		MG90S_Rotate_down3();
 		MG90S_Rotate_down4();
 		MG90S_Rotate_down5();
 		HAL_Delay(1000);
-		Trackinghou();
+		Trackinghou3();
 		HAL_Delay(100);
 		Tracking2();
 		HAL_Delay(100);
@@ -309,10 +299,10 @@ whitebalance();
 		HAL_Delay(1000);
 		//旋转舵机识别并前往放置
 		//放4
-		DISC_Rotate(1350);//4颜色
+		DISC_Rotate(2000);//4颜色
 		HAL_Delay(1000);
 		color = rgb();
-		DISC_Rotate(1650);//4在右
+		DISC_Rotate(1750);//4在右
 		HAL_Delay(500);
 		DISC_Rotate(1350);//4在前
 		HAL_Delay(100);
@@ -334,13 +324,13 @@ whitebalance();
 		HAL_Delay(1000);
 		//放5
 		DISC_Rotate(1750);//5在前
-		HAL_Delay(500);
-		DISC_Rotate(2050);//5在右
-		HAL_Delay(500);
-		DISC_Rotate(1000);//5颜色
+		HAL_Delay(1500);
+		DISC_Rotate(2150);//5在右
+		HAL_Delay(1500);
+		DISC_Rotate(2350);//5颜色
 		HAL_Delay(1000);
 		color = rgb();
-		DISC_Rotate(2050);//5在右
+		DISC_Rotate(2150);//5在右
 		HAL_Delay(500);
 		DISC_Rotate(1750);//5在前
 		HAL_Delay(100);
@@ -363,14 +353,10 @@ whitebalance();
 		HAL_Delay(1000);
 		//放1
 		DISC_Rotate(2150);//1在前
-		HAL_Delay(500);
-		DISC_Rotate(500);//1在右
-		HAL_Delay(500);
-		DISC_Rotate(1025);//1颜色
-		HAL_Delay(1000);
+		HAL_Delay(1500);
+		DISC_Rotate(750);//1颜色
+		HAL_Delay(1500);
 		color = rgb();
-		DISC_Rotate(500);//1在右
-		HAL_Delay(500);
 		DISC_Rotate(2150);//1在前
 		HAL_Delay(100);
 		tcs2300(color);
@@ -391,13 +377,13 @@ whitebalance();
 		HAL_Delay(1000);
 		//放2
 		DISC_Rotate(400);//2在前
+		HAL_Delay(1500);
+		DISC_Rotate(900);//2在右
 		HAL_Delay(500);
-		DISC_Rotate(875);//2在右
-		HAL_Delay(500);
-		DISC_Rotate(1400);//2颜色
-		HAL_Delay(1000);
+		DISC_Rotate(1150);//2颜色
+		HAL_Delay(1500);
 		color = rgb();
-		DISC_Rotate(875);//2在右
+		DISC_Rotate(900);//2在右
 		HAL_Delay(500);
 		DISC_Rotate(400);//2在前
 		HAL_Delay(100);
@@ -419,13 +405,13 @@ whitebalance();
 		HAL_Delay(1000);
 		//放3
 		DISC_Rotate(900);//3在前
-		HAL_Delay(500);
-		DISC_Rotate(1250);//3在右
-		HAL_Delay(500);
-		DISC_Rotate(1800);//3颜色
-		HAL_Delay(1000);
+		HAL_Delay(1500);
+		DISC_Rotate(1350);//3在右
+		HAL_Delay(1500);
+		DISC_Rotate(1600);//3颜色
+		HAL_Delay(1500);
 		color = rgb();
-		DISC_Rotate(1250);//3在右
+		DISC_Rotate(1350);//3在右
 		HAL_Delay(500);
 		DISC_Rotate(900);//3在前
 		HAL_Delay(100);
@@ -452,6 +438,7 @@ whitebalance();
 		youzhuan1();
 		HAL_Delay(1000);
 		Tracking6();
+		Tracking7();
 		HAL_Delay(100);
 		MG90S_Rotate_down1();
 		MG90S_Rotate_down2();
@@ -459,7 +446,7 @@ whitebalance();
 		MG90S_Rotate_down4();
 		MG90S_Rotate_down5();
 		HAL_Delay(1000);
-		Trackinghou();
+		Trackinghou3();
 		HAL_Delay(100);
 		Tracking2();
 		HAL_Delay(100);
@@ -468,10 +455,10 @@ whitebalance();
 		HAL_Delay(1000);
 		//旋转舵机识别并前往放置
 		//放4
-		DISC_Rotate(2200);//4颜色
+		DISC_Rotate(2000);//4颜色
 		HAL_Delay(1000);
 		color = rgb();
-		DISC_Rotate(1650);//4在右
+		DISC_Rotate(1750);//4在右
 		HAL_Delay(500);
 		DISC_Rotate(1350);//4在前
 		HAL_Delay(100);
@@ -493,16 +480,17 @@ whitebalance();
 		HAL_Delay(1000);
 		//放5
 		DISC_Rotate(1750);//5在前
-		HAL_Delay(500);
-		DISC_Rotate(2050);//5在右
-		HAL_Delay(500);
-		DISC_Rotate(1000);//5颜色
+		HAL_Delay(1500);
+		DISC_Rotate(2150);//5在右
+		HAL_Delay(1500);
+		DISC_Rotate(2350);//5颜色
 		HAL_Delay(1000);
 		color = rgb();
-		DISC_Rotate(2050);//5在右
+		DISC_Rotate(2150);//5在右
 		HAL_Delay(500);
 		DISC_Rotate(1750);//5在前
 		HAL_Delay(100);
+		
 		tcs2300(color);
 		HAL_Delay(100);
 		Tracking5();
@@ -521,14 +509,10 @@ whitebalance();
 		HAL_Delay(1000);
 		//放1
 		DISC_Rotate(2150);//1在前
-		HAL_Delay(500);
-		DISC_Rotate(500);//1在右
-		HAL_Delay(500);
-		DISC_Rotate(1025);//1颜色
-		HAL_Delay(1000);
+		HAL_Delay(1500);
+		DISC_Rotate(750);//1颜色
+		HAL_Delay(1500);
 		color = rgb();
-		DISC_Rotate(500);//1在右
-		HAL_Delay(500);
 		DISC_Rotate(2150);//1在前
 		HAL_Delay(100);
 		tcs2300(color);
@@ -549,13 +533,13 @@ whitebalance();
 		HAL_Delay(1000);
 		//放2
 		DISC_Rotate(400);//2在前
+		HAL_Delay(1500);
+		DISC_Rotate(900);//2在右
 		HAL_Delay(500);
-		DISC_Rotate(875);//2在右
-		HAL_Delay(500);
-		DISC_Rotate(1400);//2颜色
-		HAL_Delay(1000);
+		DISC_Rotate(1150);//2颜色
+		HAL_Delay(1500);
 		color = rgb();
-		DISC_Rotate(875);//2在右
+		DISC_Rotate(900);//2在右
 		HAL_Delay(500);
 		DISC_Rotate(400);//2在前
 		HAL_Delay(100);
@@ -574,16 +558,16 @@ whitebalance();
 		Tracking2();
 		HAL_Delay(500);
 		tcs2300_turn(color);
-		HAL_Delay(1000);  
+		HAL_Delay(1000);
 		//放3
 		DISC_Rotate(900);//3在前
-		HAL_Delay(500);
+		HAL_Delay(1500);
 		DISC_Rotate(1350);//3在右
-		HAL_Delay(500);
-		DISC_Rotate(1800);//3颜色
-		HAL_Delay(1000);
+		HAL_Delay(1500);
+		DISC_Rotate(1600);//3颜色
+		HAL_Delay(1500);
 		color = rgb();
-		DISC_Rotate(1250);//3在右
+		DISC_Rotate(1350);//3在右
 		HAL_Delay(500);
 		DISC_Rotate(900);//3在前
 		HAL_Delay(100);
@@ -614,8 +598,9 @@ whitebalance();
 
   while (1)
   {
+
 	/* USER CODE BEGIN 3 */	
-		R=tcs2300_RED();
+	R=tcs2300_RED();
 	G=tcs2300_GREEN();
 	B=tcs2300_BLUE();
 	

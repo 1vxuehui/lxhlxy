@@ -17,8 +17,8 @@ uint8_t red_flag;
 uint8_t white_flag=0;
 uint16_t x[3];
 //赛前实地测试读白平衡数组x[3]填好这三个值
-//uint16_t r_t=86,g_t=90,b_t=110;//白天
-uint16_t r_t=49,g_t=53,b_t=62;//晚上
+uint16_t r_t=62,g_t=65,b_t=75;
+//uint16_t r_t=49,g_t=53,b_t=62;
 EXTI_HandleTypeDef l;
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -165,7 +165,7 @@ uint16_t tcs2300_BLUE(void)
 	//计算亮度L
 	L =(max+min)/2;
 	
-	if(R>200 && G>200 && B>200)//白色
+	if(R>150 && G>150 && B>150)//白色
 	{
 		return 2;
 	}
@@ -173,11 +173,11 @@ uint16_t tcs2300_BLUE(void)
 	{
 		return 1;
 	}
-	else if(R<60 && G<60 && B<60)//黑色
+		else if(R<45 && G<45 && B<45)//黑色
 	{
 		return 4;
 	}
-	else if(B>G && B>R && H>200)//蓝色
+		else if(B>G && B>R )//蓝色
 	{
 		return 5;
 	}
@@ -191,7 +191,7 @@ uint16_t tcs2300_BLUE(void)
 	}
 }
 
-void tcs2300(int color_t)//前往对应颜色的分路，记得在
+void tcs2300(int color_t)//前往对应颜色的分路
 {
 	switch(color_t)
 	{
