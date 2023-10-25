@@ -32,7 +32,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-#include "tsc2300.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "Track.h"
@@ -93,6 +93,7 @@ float max,min;
   */
 int main(void)
 {
+	
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -124,6 +125,7 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM2_Init();
   MX_TIM9_Init();
+  MX_TIM10_Init();
   /* USER CODE BEGIN 2 */
 	MX_GPIO_Init();
   MX_DMA_Init();
@@ -142,514 +144,472 @@ int main(void)
 HAL_TIM_PWM_Start(&htim9,TIM_CHANNEL_1);
 HAL_TIM_PWM_Start(&htim9,TIM_CHANNEL_2);
 HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
+HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
 HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
 HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_1);
 HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_2);
 HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_3);
 HAL_TIM_PWM_Start(&htim4,TIM_CHANNEL_4);
+HAL_TIM_PWM_Start(&htim5,TIM_CHANNEL_1);
+HAL_TIM_PWM_Start(&htim10,TIM_CHANNEL_1);
 HAL_TIM_Encoder_Start(&htim1, TIM_CHANNEL_ALL);
 HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
 
 HAL_TIM_Base_Start_IT(&htim6);
 whitebalance();
-//任务开始
-    /* USER CODE END WHILE */
-		/*任务1*/
-		DISC_Rotate(2150);
-		MG90S_Rotate_up1();
-		MG90S_Rotate_up2();
-		MG90S_Rotate_up3();
-		MG90S_Rotate_up4();
-		MG90S_Rotate_up5();
-		Tracking();
 
-		HAL_Delay(1000);
-		MG90S_Rotate_down1();		//舵机抓
-		HAL_Delay(1000);
-		DISC_Rotate(400);//2在前
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(1000);
-		youzhuan2();
-		HAL_Delay(1000);	
-		Tracking5();
-		HAL_Delay(1000);		
-		MG90S_Rotate_down2();			//舵机抓
-		HAL_Delay(1000);
-		DISC_Rotate(900);//3在前
-		HAL_Delay(1000);															
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(1000);
-		zuozhuan3();
-		HAL_Delay(1000);
-		Tracking5();
-		HAL_Delay(1000);
-		MG90S_Rotate_down3();	
-		HAL_Delay(1000);//舵机抓								
-		Trackinghou();
-		HAL_Delay(1000);
-		Tracking2();
-		HAL_Delay(1000);
-		youzhuan2();
-	//物块识别
-		//放1
-		DISC_Rotate(2150);//1在前
-		HAL_Delay(500);
-		DISC_Rotate(750);//1颜色
-		HAL_Delay(1000);
-		color = rgb();
-		DISC_Rotate(2150);//1在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
+//MG90S_Rotate_CLOSE6();
+
+////任务开始
+//    /* USER CODE END WHILE */
+//		/*任务1*/
+//		DISC_Rotate(2150);
+//		MG90S_Rotate_up1();
+//		MG90S_Rotate_up2();
+//		MG90S_Rotate_up3();
+//		MG90S_Rotate_up4();
+//		MG90S_Rotate_up5();
+//		Tracking();
+
+//		HAL_Delay(1000);
+//		MG90S_Rotate_down1();		//舵机抓
+//		HAL_Delay(1000);
+//		DISC_Rotate(400);//2在前
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(1000);
+//		youzhuan2();
+//		HAL_Delay(1000);	
 //		Tracking5();
-//		HAL_Delay(100);
-//		Tracking4();
-//		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up1();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放2
-		DISC_Rotate(400);//2在前
-		HAL_Delay(500);
-		DISC_Rotate(1150);//2颜色
-		HAL_Delay(1000);
-		color = rgb();
-		DISC_Rotate(400);//2在前
-		HAL_Delay(100);
-		tcs2300(color);
-//		HAL_Delay(100);
+//		HAL_Delay(1000);		
+//		MG90S_Rotate_down2();			//舵机抓
+//		HAL_Delay(1000);
+//		DISC_Rotate(900);//3在前
+//		HAL_Delay(1000);															
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(1000);
+//		zuozhuan3();
+//		HAL_Delay(1000);
 //		Tracking5();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_down3();	
+//		HAL_Delay(1000);//舵机抓								
+//		Trackinghou();
+//		HAL_Delay(1000);
+//		Tracking2();
+//		HAL_Delay(1000);
+//		youzhuan2();
+//	//物块识别
+//		//放1
+//		DISC_Rotate(2150);//1在前
+//		HAL_Delay(500);
+//		DISC_Rotate(750);//1颜色
+//		HAL_Delay(1000);
+//		color = rgb();
+//		DISC_Rotate(2150);//1在前
 //		HAL_Delay(100);
-//		Tracking4();
+//		tcs2300(color);
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up2();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放3
-		DISC_Rotate(900);//3在前
-		HAL_Delay(500); 
-		DISC_Rotate(1350);//3在右
-		HAL_Delay(500);
-		DISC_Rotate(1800);//3颜色
-		HAL_Delay(1000);
-		color = rgb();
-		DISC_Rotate(1350);//3在右
-		HAL_Delay(500);
-		DISC_Rotate(900);//3在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		Tracking3();
 //		HAL_Delay(100);
-//		Tracking4();
+//		MG90S_Rotate_up1();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放2
+//		DISC_Rotate(400);//2在前
+//		HAL_Delay(500);
+//		DISC_Rotate(1150);//2颜色
+//		HAL_Delay(1000);
+//		color = rgb();
+//		DISC_Rotate(400);//2在前
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up3();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		DISC_Rotate(2150);//1在前
-		
-		
-		
-		
-		/*任务2*/
-		//F区
-		zuozhuan2();
-		zuozhuan1();
-		HAL_Delay(1000);
+//		tcs2300(color);
+//		Tracking3();
+//		HAL_Delay(100);
+//		MG90S_Rotate_up2();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放3
+//		DISC_Rotate(900);//3在前
+//		HAL_Delay(500); 
+//		DISC_Rotate(1350);//3在右
+//		HAL_Delay(500);
+//		DISC_Rotate(1800);//3颜色
+//		HAL_Delay(1000);
+//		color = rgb();
+//		DISC_Rotate(1350);//3在右
+//		HAL_Delay(500);
+//		DISC_Rotate(900);//3在前
+//		HAL_Delay(100);
+//		tcs2300(color);
+//		HAL_Delay(100);
+//		Tracking3();
+//		HAL_Delay(100);
+//		MG90S_Rotate_up3();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		DISC_Rotate(2150);//1在前
+//		
+//		
+//		
+//		
+//		/*任务2*/
+//		//F区
+//		zuozhuan2();
+//		zuozhuan1();
+//		HAL_Delay(1000);
 		Tracking6();
 		HAL_Delay(1000);
 		Tracking7();
-		HAL_Delay(1000);
-		MG90S_Rotate_down1();
-		MG90S_Rotate_down2();
-		MG90S_Rotate_down3();
-		MG90S_Rotate_down4();
-		MG90S_Rotate_down5();
-		HAL_Delay(1000);
-		Trackinghou3();
-		HAL_Delay(100);
-		Tracking2();
-		HAL_Delay(100);
-		youzhuan1();
-		youzhuan2();
-		HAL_Delay(1000);
-		//旋转舵机识别并前往放置
-		//放4
-		DISC_Rotate(2000);//4颜色
-		HAL_Delay(1000);
-		color = rgb();
-		DISC_Rotate(1750);//4在右
-		HAL_Delay(500);
-		DISC_Rotate(1350);//4在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_down1();
+//		MG90S_Rotate_down2();
+//		MG90S_Rotate_down3();
+//		MG90S_Rotate_down4();
+//		MG90S_Rotate_down5();
+//		HAL_Delay(1000);
+//		Trackinghou3();
 //		HAL_Delay(100);
-//		Tracking4();
+//		Tracking2();
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放5
-		DISC_Rotate(1750);//5在前
-		HAL_Delay(1500);
-		DISC_Rotate(2150);//5在右
-		HAL_Delay(1500);
-		DISC_Rotate(2350);//5颜色
-		HAL_Delay(1000);
-		color = rgb();
-		DISC_Rotate(2150);//5在右
-		HAL_Delay(500);
-		DISC_Rotate(1750);//5在前
-		HAL_Delay(100);
-		
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		youzhuan1();
+//		youzhuan2();
+//		HAL_Delay(1000);
+//		//旋转舵机识别并前往放置
+//		//放4
+//		DISC_Rotate(2000);//4颜色
+//		HAL_Delay(1000);
+//		color = rgb();
+//		DISC_Rotate(1750);//4在右
+//		HAL_Delay(500);
+//		DISC_Rotate(1350);//4在前
 //		HAL_Delay(100);
-//		Tracking4();
+//		tcs2300(color);
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up5();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放1
-		DISC_Rotate(2150);//1在前
-		HAL_Delay(1500);
-		DISC_Rotate(750);//1颜色
-		HAL_Delay(1500);
-		color = rgb();
-		DISC_Rotate(2150);//1在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		Tracking3();
 //		HAL_Delay(100);
-//		Tracking4();
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放5
+//		DISC_Rotate(1750);//5在前
+//		HAL_Delay(1500);
+//		DISC_Rotate(2150);//5在右
+//		HAL_Delay(1500);
+//		DISC_Rotate(2350);//5颜色
+//		HAL_Delay(1000);
+//		color = rgb();
+//		DISC_Rotate(2150);//5在右
+//		HAL_Delay(500);
+//		DISC_Rotate(1750);//5在前
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up1();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放2
-		DISC_Rotate(400);//2在前
-		HAL_Delay(1500);
-		DISC_Rotate(900);//2在右
-		HAL_Delay(500);
-		DISC_Rotate(1150);//2颜色
-		HAL_Delay(1500);
-		color = rgb();
-		DISC_Rotate(900);//2在右
-		HAL_Delay(500);
-		DISC_Rotate(400);//2在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		
+//		tcs2300(color);
 //		HAL_Delay(100);
-//		Tracking4();
+//		Tracking3();
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up2();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放3
-		DISC_Rotate(900);//3在前
-		HAL_Delay(1500);
-		DISC_Rotate(1350);//3在右
-		HAL_Delay(1500);
-		DISC_Rotate(1600);//3颜色
-		HAL_Delay(1500);
-		color = rgb();
-		DISC_Rotate(1350);//3在右
-		HAL_Delay(500);
-		DISC_Rotate(900);//3在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		MG90S_Rotate_up5();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放1
+//		DISC_Rotate(2150);//1在前
+//		HAL_Delay(1500);
+//		DISC_Rotate(750);//1颜色
+//		HAL_Delay(1500);
+//		color = rgb();
+//		DISC_Rotate(2150);//1在前
 //		HAL_Delay(100);
-//		Tracking4();
+//		tcs2300(color);
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up3();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		DISC_Rotate(500);//1在右
-		HAL_Delay(500);
-		DISC_Rotate(2150);//1在前
-		//G区
-		youzhuan2();
-		youzhuan1();
-		HAL_Delay(1000);
-		Tracking6();
-		Tracking7();
-		HAL_Delay(100);
-		MG90S_Rotate_down1();
-		MG90S_Rotate_down2();
-		MG90S_Rotate_down3();
-		MG90S_Rotate_down4();
-		MG90S_Rotate_down5();
-		HAL_Delay(1000);
-		Trackinghou3();
-		HAL_Delay(100);
-		Tracking2();
-		HAL_Delay(100);
-		zuozhuan1();
-		zuozhuan2();
-		HAL_Delay(1000);
-		//旋转舵机识别并前往放置
-		//放4
-		DISC_Rotate(2000);//4颜色
-		HAL_Delay(1000);
-		color = rgb();
-		DISC_Rotate(1750);//4在右
-		HAL_Delay(500);
-		DISC_Rotate(1350);//4在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		Tracking3();
 //		HAL_Delay(100);
-//		Tracking4();
+//		MG90S_Rotate_up1();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放2
+//		DISC_Rotate(400);//2在前
+//		HAL_Delay(1500);
+//		DISC_Rotate(900);//2在右
+//		HAL_Delay(500);
+//		DISC_Rotate(1150);//2颜色
+//		HAL_Delay(1500);
+//		color = rgb();
+//		DISC_Rotate(900);//2在右
+//		HAL_Delay(500);
+//		DISC_Rotate(400);//2在前
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up4();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放5
-		DISC_Rotate(1750);//5在前
-		HAL_Delay(1500);
-		DISC_Rotate(2150);//5在右
-		HAL_Delay(1500);
-		DISC_Rotate(2350);//5颜色
-		HAL_Delay(1000);
-		color = rgb();
-		DISC_Rotate(2150);//5在右
-		HAL_Delay(500);
-		DISC_Rotate(1750);//5在前
-		HAL_Delay(100);
-		
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		tcs2300(color);
 //		HAL_Delay(100);
-//		Tracking4();
+//		Tracking3();
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up5();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放1
-		DISC_Rotate(2150);//1在前
-		HAL_Delay(1500);
-		DISC_Rotate(750);//1颜色
-		HAL_Delay(1500);
-		color = rgb();
-		DISC_Rotate(2150);//1在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		MG90S_Rotate_up2();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放3
+//		DISC_Rotate(900);//3在前
+//		HAL_Delay(1500);
+//		DISC_Rotate(1350);//3在右
+//		HAL_Delay(1500);
+//		DISC_Rotate(1600);//3颜色
+//		HAL_Delay(1500);
+//		color = rgb();
+//		DISC_Rotate(1350);//3在右
+//		HAL_Delay(500);
+//		DISC_Rotate(900);//3在前
 //		HAL_Delay(100);
-//		Tracking4();
+//		tcs2300(color);
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up1();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放2
-		DISC_Rotate(400);//2在前
-		HAL_Delay(1500);
-		DISC_Rotate(900);//2在右
-		HAL_Delay(500);
-		DISC_Rotate(1150);//2颜色
-		HAL_Delay(1500);
-		color = rgb();
-		DISC_Rotate(900);//2在右
-		HAL_Delay(500);
-		DISC_Rotate(400);//2在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		Tracking3();
 //		HAL_Delay(100);
-//		Tracking4();
+//		MG90S_Rotate_up3();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		DISC_Rotate(500);//1在右
+//		HAL_Delay(500);
+//		DISC_Rotate(2150);//1在前
+//		//G区
+//		youzhuan2();
+//		youzhuan1();
+//		HAL_Delay(1000);
+//		Tracking6();
+//		Tracking7();
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up2();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		HAL_Delay(1000);
-		//放3
-		DISC_Rotate(900);//3在前
-		HAL_Delay(1500);
-		DISC_Rotate(1350);//3在右
-		HAL_Delay(1500);
-		DISC_Rotate(1600);//3颜色
-		HAL_Delay(1500);
-		color = rgb();
-		DISC_Rotate(1350);//3在右
-		HAL_Delay(500);
-		DISC_Rotate(900);//3在前
-		HAL_Delay(100);
-		tcs2300(color);
-		HAL_Delay(100);
-//		Tracking5();
+//		MG90S_Rotate_down1();
+//		MG90S_Rotate_down2();
+//		MG90S_Rotate_down3();
+//		MG90S_Rotate_down4();
+//		MG90S_Rotate_down5();
+//		HAL_Delay(1000);
+//		Trackinghou3();
 //		HAL_Delay(100);
-//		Tracking4();
+//		Tracking2();
 //		HAL_Delay(100);
-		Tracking3();
-		HAL_Delay(100);
-		MG90S_Rotate_up3();
-		HAL_Delay(1000);
-		Trackinghou();
-		HAL_Delay(500);
-		Tracking2();
-		HAL_Delay(500);
-		tcs2300_turn(color);
-		DISC_Rotate(500);//1在右
-		HAL_Delay(500);
-		DISC_Rotate(2150);//1在前
-		/*归位*/
-		Trackinghou2();
-	//任务结束 
+//		zuozhuan1();
+//		zuozhuan2();
+//		HAL_Delay(1000);
+//		//旋转舵机识别并前往放置
+//		//放4
+//		DISC_Rotate(2000);//4颜色
+//		HAL_Delay(1000);
+//		color = rgb();
+//		DISC_Rotate(1750);//4在右
+//		HAL_Delay(500);
+//		DISC_Rotate(1350);//4在前
+//		HAL_Delay(100);
+//		tcs2300(color);
+//		HAL_Delay(100);
+//		Tracking3();
+//		HAL_Delay(100);
+//		MG90S_Rotate_up4();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放5
+//		DISC_Rotate(1750);//5在前
+//		HAL_Delay(1500);
+//		DISC_Rotate(2150);//5在右
+//		HAL_Delay(1500);
+//		DISC_Rotate(2350);//5颜色
+//		HAL_Delay(1000);
+//		color = rgb();
+//		DISC_Rotate(2150);//5在右
+//		HAL_Delay(500);
+//		DISC_Rotate(1750);//5在前
+//		HAL_Delay(100);
+//		
+//		tcs2300(color);
+//		HAL_Delay(100);
+//		Tracking3();
+//		HAL_Delay(100);
+//		MG90S_Rotate_up5();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放1
+//		DISC_Rotate(2150);//1在前
+//		HAL_Delay(1500);
+//		DISC_Rotate(750);//1颜色
+//		HAL_Delay(1500);
+//		color = rgb();
+//		DISC_Rotate(2150);//1在前
+//		HAL_Delay(100);
+//		tcs2300(color);
+//		HAL_Delay(100);
+//		Tracking3();
+//		HAL_Delay(100);
+//		MG90S_Rotate_up1();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放2
+//		DISC_Rotate(400);//2在前
+//		HAL_Delay(1500);
+//		DISC_Rotate(900);//2在右
+//		HAL_Delay(500);
+//		DISC_Rotate(1150);//2颜色
+//		HAL_Delay(1500);
+//		color = rgb();
+//		DISC_Rotate(900);//2在右
+//		HAL_Delay(500);
+//		DISC_Rotate(400);//2在前
+//		HAL_Delay(100);
+//		tcs2300(color);
+//		HAL_Delay(100);
+//		Tracking3();
+//		HAL_Delay(100);
+//		MG90S_Rotate_up2();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		HAL_Delay(1000);
+//		//放3
+//		DISC_Rotate(900);//3在前
+//		HAL_Delay(1500);
+//		DISC_Rotate(1350);//3在右
+//		HAL_Delay(1500);
+//		DISC_Rotate(1600);//3颜色
+//		HAL_Delay(1500);
+//		color = rgb();
+//		DISC_Rotate(1350);//3在右
+//		HAL_Delay(500);
+//		DISC_Rotate(900);//3在前
+//		HAL_Delay(100);
+//		tcs2300(color);
+//		HAL_Delay(100);
+//		Tracking3();
+//		HAL_Delay(100);
+//		MG90S_Rotate_up3();
+//		HAL_Delay(1000);
+//		Trackinghou();
+//		HAL_Delay(500);
+//		Tracking2();
+//		HAL_Delay(500);
+//		tcs2300_turn(color);
+//		DISC_Rotate(500);//1在右
+//		HAL_Delay(500);
+//		DISC_Rotate(2150);//1在前
+//		/*归位*/
+//		Trackinghou2();
+//	//任务结束 
 
-/* USER CODE END 2 */
-  /* Infini__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,1000);te loop */
+  /* USER CODE END 2 */
 
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
   while (1)
   {
 
-	/* USER CODE BEGIN 3 */	
-	R=tcs2300_RED();
-	G=tcs2300_GREEN();
-	B=tcs2300_BLUE();
-	
-	//计算最大值
-	if(R==G&&G==B)	max = 1;
-	else if(R>=G&&R>=B)	max = R;
-	else if(G>=R&&G>=B)	max = G;
-	else if(B>=G&&B>=R)	max = B;
-	else	max = 0;
-	//计算最小值
-	if(R==G&&G==B)	min = 1;
-	else if(R<=G&&R<=B)	min = R;
-	else if(G<=R&&G<=B)	min = G;
-	else if(B<=G&&B<=R)	min = B;
-	else	min = 0;
-	//计算色相H
-	if(max==R)	H = 60*((G-B)/(max-min));
-	if(max==G)	H = 60*((B-R)/(max-min))+120;
-	if(max==B)	H = 60*((R-G)/(max-min))+240;
-	if(max==min)	H = 0;
-	//如果H为负，则+360，修正为正数
-	if(H<0)	H+=360;		
-	//计算亮度L
-	L =(max+min)/2;
-	
-	if(R>200 && G>200 && B>200)//白色
-	{
-		color = 2;
-	}
-		else if(G>R && G>B && H<200)//绿色
-	{
-		color = 1;
-	}
-	else if(R<50 && G<50 && B<50)//黑色
-	{
-		color = 4;
-	}
-	else if(B>G && B>R && H>200)//蓝色
-	{
-		color = 5;
-	}
-	else if(R>G && R>B)//红色
-	{
-		color = 3;
-	}
-   else
-	{
-		color = 0;
-	}
+//MG90S_Rotate_CLOSE7();
+//MG90S_Rotate_CLOSE6();
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+//	R=tcs2300_RED();
+//	G=tcs2300_GREEN();
+//	B=tcs2300_BLUE();
+//	
+//	//计算最大值
+//	if(R==G&&G==B)	max = 1;
+//	else if(R>=G&&R>=B)	max = R;
+//	else if(G>=R&&G>=B)	max = G;
+//	else if(B>=G&&B>=R)	max = B;
+//	else	max = 0;
+//	//计算最小值
+//	if(R==G&&G==B)	min = 1;
+//	else if(R<=G&&R<=B)	min = R;
+//	else if(G<=R&&G<=B)	min = G;
+//	else if(B<=G&&B<=R)	min = B;
+//	else	min = 0;
+//	//计算色相H
+//	if(max==R)	H = 60*((G-B)/(max-min));
+//	if(max==G)	H = 60*((B-R)/(max-min))+120;
+//	if(max==B)	H = 60*((R-G)/(max-min))+240;
+//	if(max==min)	H = 0;
+//	//如果H为负，则+360，修正为正数
+//	if(H<0)	H+=360;		
+//	//计算亮度L
+//	L =(max+min)/2;
+//	
+//	if(R>200 && G>200 && B>200)//白色
+//	{
+//		color = 2;
+//	}
+//		else if(G>R && G>B && H<200)//绿色
+//	{
+//		color = 1;
+//	}
+//	else if(R<50 && G<50 && B<50)//黑色
+//	{
+//		color = 4;
+//	}
+//	else if(B>G && B>R && H>200)//蓝色
+//	{
+//		color = 5;
+//	}
+//	else if(R>G && R>B)//红色
+//	{
+//		color = 3;
+//	}
+//   else
+//	{
+//		color = 0;
+//	}
 
 	}  
   /* USER CODE END 3 */

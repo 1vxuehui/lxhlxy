@@ -18,7 +18,7 @@ uint8_t white_flag=0;
 uint16_t x[3];
 //赛前实地测试读白平衡数组x[3]填好这三个值
 uint16_t r_t=62,g_t=65,b_t=75;
-//uint16_t r_t=49,g_t=53,b_t=62;
+
 EXTI_HandleTypeDef l;
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)

@@ -7,6 +7,15 @@ void DISC_Rotate(int pwm_t)//该舵机每条命令之间必须加HAL_Delay且至少为500
 {
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,pwm_t);
 }
+
+void MG_RISE()
+{
+	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,1400);
+}
+void MG_DOWN()
+{
+	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,900);
+}
 /*
 pwm_t取值：
 400：2在前 1在右
@@ -39,19 +48,22 @@ pwm_t取值：
 
 //1000下 2000上
 void MG90S_Rotate_up1(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_1,2200);}
-void MG90S_Rotate_down1(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_1,800);}
+void MG90S_Rotate_down1(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_1,1000);}
 
 void MG90S_Rotate_up2(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_2,2000);}
-void MG90S_Rotate_down2(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_2,650);}
+void MG90S_Rotate_down2(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_2,1200);}
 
-void MG90S_Rotate_up3(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,1400);}
-void MG90S_Rotate_down3(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,400);}
+void MG90S_Rotate_up3(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,1500);}
+void MG90S_Rotate_down3(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_3,500);}
 
-void MG90S_Rotate_up4(){__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,2100);}
-void MG90S_Rotate_down4(){__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,800);}
+void MG90S_Rotate_up4(){__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,2200);}
+void MG90S_Rotate_down4(){__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_3,1200);}
 
-void MG90S_Rotate_up5(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_4,2000);}
+void MG90S_Rotate_up5(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_4,1600);}
 void MG90S_Rotate_down5(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_4,650);}
 
+void MG90S_Rotate_OPEN6(){__HAL_TIM_SetCompare(&htim5,TIM_CHANNEL_1,2300);}
+void MG90S_Rotate_CLOSE6(){__HAL_TIM_SetCompare(&htim5,TIM_CHANNEL_1,1650);}
 
-
+void MG90S_Rotate_OPEN7(){__HAL_TIM_SetCompare(&htim10,TIM_CHANNEL_1,1400);}
+void MG90S_Rotate_CLOSE7(){__HAL_TIM_SetCompare(&htim10,TIM_CHANNEL_1,2100);}

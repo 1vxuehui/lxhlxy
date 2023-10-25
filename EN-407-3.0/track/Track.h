@@ -12,14 +12,14 @@ uint8_t huidu_check(huidu_t* sensor);
 
 void Tracking_Init(void);
 
-extern void Tracking(void);
+extern void Tracking(void);////////////////初始巡线
 extern void Tracking1(void);
-extern void Tracking2(void);
+extern void Tracking2(void);//////////////后退到中心
 extern void Tracking3(void);
 extern void Tracking4(void);
-extern void Tracking5(void);
-extern void Tracking6(void);
-extern void Tracking7(void);
+extern void Tracking5(void);//////////寻一条黑线
+extern void Tracking6(void);////////6.7为抓五个物块操作;
+extern void Tracking7(void);////////
 extern void Trackinghou_transmit(void);
 extern void Trackinghou(void);
 extern void Trackinghou2(void);
