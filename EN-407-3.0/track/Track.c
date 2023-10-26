@@ -370,7 +370,7 @@ PID_clear(&motor[1]);
 	{
 		angle1+=speed1;
 		angle2+=speed2;
-if ((angle1>=810||angle2>=810)&&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1)
+if ((angle1>=750||angle2>=750)&&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1)
 		{
 			angle1=0;
 		angle2=0;
@@ -450,7 +450,7 @@ PID_clear(&motor[1]);
 	{
 		angle1+=speed1;
 		angle2+=speed2;
-		if ((angle1>=382||angle2>=382)&&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1)
+		if ((angle1>=375||angle2>=375)&&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1)
 		{
 			angle1=0;
 			angle2=0;
@@ -570,7 +570,7 @@ PID_clear(&motor[1]);
 		angle2+=speed2;
 		
 		
-		if (angle1>=420&&angle2>=420)
+		if (angle1>=440&&angle2>=440)
 		{
 			angle1=0;
 			angle2=0;
@@ -828,7 +828,7 @@ while(1)
 		TIM9->CCR1= motor[0].out;
 		TIM9->CCR2= motor[1].out;
 		HAL_Delay(50);
-if(((((HAL_GPIO_ReadPin(huidu11_GPIO_Port,huidu11_Pin)) == 1 )&&(HAL_GPIO_ReadPin(huidu17_GPIO_Port,huidu17_Pin) == 1)) == 1)&&(angle1>2850||angle2>2850))
+if(((((HAL_GPIO_ReadPin(huidu11_GPIO_Port,huidu11_Pin)) == 1 )&&(HAL_GPIO_ReadPin(huidu17_GPIO_Port,huidu17_Pin) == 1)) == 1)&&(angle1>3000||angle2>3000))
 {
 		angle1=0;
 		angle2=0;
