@@ -167,8 +167,8 @@ whitebalance();
 		MG90S_Rotate_up3();
 		MG90S_Rotate_up4();
 		MG90S_Rotate_up5();
+		  
 		Tracking();
-
 		HAL_Delay(1000);
 		MG90S_Rotate_down1();		//舵机抓
 		HAL_Delay(1000);
@@ -292,6 +292,10 @@ whitebalance();
 		HAL_Delay(1000);
 		//旋转舵机识别并前往放置
 		//放4
+		DISC_Rotate(1350);//4在前
+		HAL_Delay(500); 
+		DISC_Rotate(1750);//4在右
+		HAL_Delay(500);
 		DISC_Rotate(2000);//4颜色
 		HAL_Delay(1000);
 		color = rgb();
@@ -316,14 +320,12 @@ whitebalance();
 		HAL_Delay(1500);
 		DISC_Rotate(2150);//5在右
 		HAL_Delay(1500);
-		DISC_Rotate(1000);//5颜色
+		DISC_Rotate(2500);//5颜色
 		HAL_Delay(1000);
 		color = rgb();
 		DISC_Rotate(2150);//5在右
 		HAL_Delay(500);
 		DISC_Rotate(1750);//5在前
-		HAL_Delay(100);
-		
 		tcs2300(color);
 		HAL_Delay(100);
 		Tracking3();
@@ -429,6 +431,10 @@ whitebalance();
 		HAL_Delay(1000);
 		//旋转舵机识别并前往放置
 		//放4
+		DISC_Rotate(1350);//4在前
+		HAL_Delay(500); 
+		DISC_Rotate(1750);//4在右
+		HAL_Delay(500);
 		DISC_Rotate(2000);//4颜色
 		HAL_Delay(1000);
 		color = rgb();
@@ -453,14 +459,13 @@ whitebalance();
 		HAL_Delay(1500);
 		DISC_Rotate(2150);//5在右
 		HAL_Delay(1500);
-		DISC_Rotate(2350);//5颜色
+		DISC_Rotate(2500);//5颜色
 		HAL_Delay(1000);
 		color = rgb();
 		DISC_Rotate(2150);//5在右
 		HAL_Delay(500);
 		DISC_Rotate(1750);//5在前
 		HAL_Delay(100);
-		
 		tcs2300(color);
 		HAL_Delay(100);
 		Tracking3();

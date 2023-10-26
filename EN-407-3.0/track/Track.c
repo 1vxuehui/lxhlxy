@@ -614,7 +614,7 @@ PID_clear(&motor[1]);
 		angle2+=speed2;
 		
 		
-		if (angle1>=200&&angle2>=200)
+		if (angle1>=210&&angle2>=210)
 		{
 			angle1=0;
 			angle2=0;
