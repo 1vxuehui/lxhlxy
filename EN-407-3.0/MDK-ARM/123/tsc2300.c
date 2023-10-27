@@ -173,11 +173,11 @@ uint16_t tcs2300_BLUE(void)
 	{
 		return 1;
 	}
-		else if(R<45 && G<45 && B<45)//黑色
+		else if(R<60 && G<60 && B<60)//黑色
 	{
 		return 4;
 	}
-		else if(B>G && B>R )//蓝色
+		else if(B>G && B>R && L>60)//蓝色
 	{
 		return 5;
 	}

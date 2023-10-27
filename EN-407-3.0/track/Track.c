@@ -80,10 +80,26 @@ else if ( (HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 1 &&(HAL_GPIO_Rea
 {
 	//右转
 	you_set_speed_1 = 50;
-	zuo_set_speed_2 = 30;
+	zuo_set_speed_2 = 20;
 	car_go_straight();
 }
 else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 1 ||
+				(HAL_GPIO_ReadPin(huidu16_GPIO_Port,huidu16_Pin)) == 1  )
+{
+	//左转
+	you_set_speed_1 = 20;
+	zuo_set_speed_2 = 50;
+	car_go_straight();
+}
+else if ( (HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0||
+					(HAL_GPIO_ReadPin(huidu12_GPIO_Port,huidu12_Pin)) == 1)
+{
+	//右转
+	you_set_speed_1 = 50;
+	zuo_set_speed_2 = 30;
+	car_go_straight();
+}
+else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1&& (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 1 ||
 				(HAL_GPIO_ReadPin(huidu16_GPIO_Port,huidu16_Pin)) == 1  )
 {
 	//左转
@@ -94,8 +110,8 @@ else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadP
 else
 {
 //
-	you_set_speed_1 = 60;
-	zuo_set_speed_2 = 60;
+	you_set_speed_1 = 50;
+	zuo_set_speed_2 = 50;
 	car_go_straight();
 }
 
@@ -150,11 +166,28 @@ else if ( (HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 1 &&(HAL_GPIO_Rea
 {
 	//左转
 	you_set_speed_1 = 60;
-	zuo_set_speed_2 = 40;
+	zuo_set_speed_2 = 30;
 	car_go_after();
 	flag_ = 1;
 }
 else if((HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin)) == 0 && (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin)) == 1)
+{
+	//右转
+	
+	you_set_speed_1 = 30;
+	zuo_set_speed_2 = 60;
+	car_go_after();
+	flag_ = 2;
+}
+else if ( (HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin)) == 0)
+{
+	//左转
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 40;
+	car_go_after();
+	flag_ = 1;
+}
+else if((HAL_GPIO_ReadPin(huidu22_GPIO_Port,huidu22_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu24_GPIO_Port,huidu24_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu25_GPIO_Port,huidu25_Pin)) == 1)
 {
 	//右转
 	
@@ -728,8 +761,8 @@ void Tracking5(void)
 {
 PID_clear(&motor[0]);
 PID_clear(&motor[1]);
-angle1 =0;
-	angle2=0;
+angle1=0;
+angle2=0;
 		Tracking_Init();
 	
 while(1)
@@ -776,6 +809,22 @@ else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadP
 {
 	//左转
 	you_set_speed_1 = 25;
+	zuo_set_speed_2 = 60;
+	car_go_straight();
+}
+else if ( (HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0||
+					(HAL_GPIO_ReadPin(huidu12_GPIO_Port,huidu12_Pin)) == 1)
+{
+	//右转
+	you_set_speed_1 = 60;
+	zuo_set_speed_2 = 40;
+	car_go_straight();
+}
+else if((HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 1 ||
+				(HAL_GPIO_ReadPin(huidu16_GPIO_Port,huidu16_Pin)) == 1  )
+{
+	//左转
+	you_set_speed_1 = 40;
 	zuo_set_speed_2 = 60;
 	car_go_straight();
 }
@@ -828,7 +877,7 @@ while(1)
 		TIM9->CCR1= motor[0].out;
 		TIM9->CCR2= motor[1].out;
 		HAL_Delay(50);
-if(((((HAL_GPIO_ReadPin(huidu11_GPIO_Port,huidu11_Pin)) == 1 )&&(HAL_GPIO_ReadPin(huidu17_GPIO_Port,huidu17_Pin) == 1)) == 1)&&(angle1>3000||angle2>3000))
+if(((((HAL_GPIO_ReadPin(huidu11_GPIO_Port,huidu11_Pin)) == 1 )&&(HAL_GPIO_ReadPin(huidu17_GPIO_Port,huidu17_Pin) == 1)) == 1)&&(angle1>3100||angle2>3100))
 {
 		angle1=0;
 		angle2=0;
@@ -836,7 +885,6 @@ if(((((HAL_GPIO_ReadPin(huidu11_GPIO_Port,huidu11_Pin)) == 1 )&&(HAL_GPIO_ReadPi
    break;
 	
 }
-
 
 else if ( (HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 0 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 0 
 ||	(HAL_GPIO_ReadPin(huidu13_GPIO_Port,huidu13_Pin)) == 1 &&(HAL_GPIO_ReadPin(huidu14_GPIO_Port,huidu14_Pin)) == 1 && (HAL_GPIO_ReadPin(huidu15_GPIO_Port,huidu15_Pin)) == 1 )

@@ -14,7 +14,7 @@ void MG_RISE()
 }
 void MG_DOWN()
 {
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,900);
+	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,1000);
 }
 /*
 pwm_t取值：
@@ -36,7 +36,7 @@ pwm_t取值：
 //	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,1200);
 //			HAL_Delay(time);
 //	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_1,0);
-//}9
+//}
 
 //void DISC_Rotate_Clockwise(int time)//顺时针
 //{
@@ -63,7 +63,7 @@ void MG90S_Rotate_up5(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_4,1600);}
 void MG90S_Rotate_down5(){__HAL_TIM_SetCompare(&htim4,TIM_CHANNEL_4,650);}
 
 void MG90S_Rotate_OPEN6(){__HAL_TIM_SetCompare(&htim5,TIM_CHANNEL_1,2300);}
-void MG90S_Rotate_CLOSE6(){__HAL_TIM_SetCompare(&htim5,TIM_CHANNEL_1,1575);}
+void MG90S_Rotate_CLOSE6(){__HAL_TIM_SetCompare(&htim5,TIM_CHANNEL_1,1550);}
 
-void MG90S_Rotate_OPEN7(){__HAL_TIM_SetCompare(&htim10,TIM_CHANNEL_1,1700);}
-void MG90S_Rotate_CLOSE7(){__HAL_TIM_SetCompare(&htim10,TIM_CHANNEL_1,2800);}
+void MG90S_Rotate_OPEN7(){__HAL_TIM_SetCompare(&htim10,TIM_CHANNEL_1,1400);}
+void MG90S_Rotate_CLOSE7(){__HAL_TIM_SetCompare(&htim10,TIM_CHANNEL_1,2700);}

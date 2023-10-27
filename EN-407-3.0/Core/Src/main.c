@@ -296,7 +296,7 @@ whitebalance();
 		HAL_Delay(500); 
 		DISC_Rotate(1750);//4在右
 		HAL_Delay(500);
-		DISC_Rotate(2000);//4颜色
+		DISC_Rotate(2200);//4颜色
 		HAL_Delay(1000);
 		color = rgb();
 		DISC_Rotate(1750);//4在右
@@ -435,7 +435,7 @@ whitebalance();
 		HAL_Delay(500); 
 		DISC_Rotate(1750);//4在右
 		HAL_Delay(500);
-		DISC_Rotate(2000);//4颜色
+		DISC_Rotate(2200);//4颜色
 		HAL_Delay(1000);
 		color = rgb();
 		DISC_Rotate(1750);//4在右
@@ -548,7 +548,167 @@ whitebalance();
 		DISC_Rotate(500);//1在右
 		HAL_Delay(500);
 		DISC_Rotate(2150);//1在前
-		/*归位*/
+		HAL_Delay(1000);
+		
+//		//摞物块
+//		zuozhuan3();
+//		HAL_Delay(1000);
+//		//绿
+//		zuozhuan2();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		//tracking8
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		HAL_Delay(1000);
+//		//tracking9
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		HAL_Delay(1000);
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		//tracking10
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		//tracking11
+//		youzhuan2();
+//		HAL_Delay(1000);
+//		//白
+//		zuozhuan1();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		//tracking8
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		HAL_Delay(1000);
+//		//tracking9
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		HAL_Delay(1000);
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		//tracking10
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		youzhuan1();
+//		HAL_Delay(1000);
+//		//tracking11
+//		//红
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		//tracking8
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		HAL_Delay(1000);
+//		//tracking9
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		HAL_Delay(1000);
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		//tracking10
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		//tracking11
+//		youzhuan1();
+//		HAL_Delay(1000);
+//		//黑
+//		youzhuan1();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		//tracking8
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		HAL_Delay(1000);
+//		//tracking9
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		HAL_Delay(1000);
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		//tracking10
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		//tracking11
+//		HAL_Delay(1000);
+//		zuozhuan1();
+//		HAL_Delay(1000);
+//		//蓝
+//		youzhuan2();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		//tracking8
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		HAL_Delay(1000);
+//		//tracking9
+//		HAL_Delay(1000);
+//		MG90S_Rotate_OPEN6();
+//		MG90S_Rotate_OPEN7();
+//		HAL_Delay(1000);
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		HAL_Delay(1000);
+//		MG_RISE();
+//		//tracking10
+//		MG_DOWN();
+//		HAL_Delay(1000);
+//		MG90S_Rotate_CLOSE6();
+//		MG90S_Rotate_CLOSE7();
+//		//tracking11
+//		HAL_Delay(1000);
+//		zuozhuan2();
+//		HAL_Delay(1000);
+//		
+//		youzhuan3();
+//		//归位
+		HAL_Delay(1000);
 		Trackinghou2();
 	//任务结束 
 
@@ -575,7 +735,7 @@ whitebalance();
 //		MG90S_Rotate_CLOSE7();
 //		HAL_Delay(3000);
     /* USER CODE END WHILE */
-		
+
     /* USER CODE BEGIN 3 */
 //	R=tcs2300_RED();
 //	G=tcs2300_GREEN();
